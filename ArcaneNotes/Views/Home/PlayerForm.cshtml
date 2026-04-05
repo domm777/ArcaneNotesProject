@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Player Form";
+}
+
+<body class="player-form">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height:90vh;">
+        <div class="col-10 col-md-8 col-lg-6 text-center">
+
+            <!-- Header -->
+            <h1 class="mb-4">Player Session Notes</h1>
+
+            <!-- Title Field -->
+            <div class="mb-4 text-start">
+                <label class="form-label fw-bold">Title</label>
+                <input type="text" id="noteTitle" class="form-control mb-3" placeholder="Enter a session title (e.g., The Crimson Voyage)">
+            </div>
+
+            <!-- Player Info -->
+            <div class="mb-4 text-start">
+                <label class="form-label fw-bold">Player Name</label>
+                <input type="text" id="playerName" class="form-control mb-3" placeholder="Enter your name">
+                <label class="form-label fw-bold">Character Name</label>
+                <input type="text" id="characterName" class="form-control" placeholder="Enter your character's name">
+            </div>
+
+            <!-- Dynamic Form Container -->
+            <div id="formContainer" class="mb-4"></div>
+
+            <!-- Add Buttons -->
+            <div class="d-flex flex-wrap gap-3 justify-content-center mb-4">
+                <button class="btn btn-outline-primary btn-lg" onclick="App.addNpc(false)">+ NPC</button>
+                <button class="btn btn-outline-primary btn-lg" onclick="App.addLocation()">+ Location</button>
+                <button class="btn btn-outline-primary btn-lg" onclick="App.addTreasure()">+ Treasure</button>
+                <button class="btn btn-outline-primary btn-lg" onclick="App.addExtra()">+ Extra Info</button>
+            </div>
+
+            <!-- Make It Arcane Button -->
+            <button class="btn btn-player btn-lg mt-4" onclick="App.makeItArcane('Player')">Make it Arcane</button>
+
+            <!-- Arcane Popup -->
+            <div id="arcanePopup" class="arcane-popup">
+                <div class="popup-content">
+                    <p id="popupMessage">⚠️ Add at least one note before making it arcane!</p>
+                    <button id="popupClose" class="btn btn-player mt-3">OK</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>

@@ -1,0 +1,570 @@
+/* =========================================
+   CARDS.CSS
+   Scoped styling for generated Spellbook cards
+   ========================================= */
+
+.card-container {
+    background: linear-gradient(180deg,#16223b,#0f1728);
+    border: 1px solid rgba(201,162,39,.35);
+    border-radius: 18px;
+    padding: 18px 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 0 1px rgba(201,162,39,.05), 0 12px 30px rgba(0,0,0,.35);
+}
+
+.cardCategoryTopDiv_LIP {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(201,162,39,.2);
+}
+
+.cardLabelDiv {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+    .cardLabelDiv h5 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #f0d79a;
+    }
+
+.cardCategoryTopDiv_LIP button,
+.cardCategoryTopDiv_LIP .img-btn {
+    min-width: 32px;
+    height: 32px;
+    border-radius: 8px;
+}
+
+
+
+/* ---------- MAIN CARD WRAPPER ---------- */
+
+.draggable-card,
+.spellbook-card {
+    background: linear-gradient(180deg, rgba(20, 28, 48, 0.97), rgba(11, 16, 30, 0.97));
+    border: 1px solid rgba(201, 162, 39, 0.32);
+    border-radius: 22px;
+    padding: 22px;
+    margin-top: 22px;
+    box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.05), 0 14px 34px rgba(0, 0, 0, 0.34), inset 0 0 18px rgba(255, 255, 255, 0.02);
+    color: #f5e7c2;
+}
+
+    /* ---------- HEADER ---------- */
+
+    .draggable-card .card-header,
+    .spellbook-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 18px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.18);
+    }
+
+.spellbook-card-header-left,
+.spellbook-card-header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.draggable-card h3,
+.draggable-card h4,
+.draggable-card .card-title,
+.spellbook-card-title {
+    margin: 0;
+    color: #f0d79a;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+}
+
+/* ---------- DRAG HANDLE ---------- */
+
+.drag-handle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    background: linear-gradient(180deg, #1a2338, #121a2d);
+    color: #d7b566;
+    font-size: 1rem;
+    cursor: grab;
+    user-select: none;
+}
+
+    .drag-handle:active {
+        cursor: grabbing;
+    }
+
+/* ---------- ACTION BUTTONS ---------- */
+
+.draggable-card .collapse-toggle,
+.draggable-card .delete-btn,
+.draggable-card .icon-btn,
+.draggable-card .card-action-btn,
+.spellbook-card .collapse-toggle,
+.spellbook-card .delete-btn,
+.spellbook-card .icon-btn,
+.spellbook-card .card-action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    background: linear-gradient(180deg, #1a2338, #121a2d);
+    color: #f0d79a;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: none;
+}
+
+    .draggable-card .collapse-toggle:hover,
+    .draggable-card .icon-btn:hover,
+    .draggable-card .card-action-btn:hover,
+    .spellbook-card .collapse-toggle:hover,
+    .spellbook-card .icon-btn:hover,
+    .spellbook-card .card-action-btn:hover {
+        background: linear-gradient(180deg, #22304d, #182238);
+        color: #fff2c7;
+        border-color: rgba(201, 162, 39, 0.5);
+    }
+
+.draggable-card .delete-btn,
+.spellbook-card .delete-btn {
+    border-color: rgba(255, 96, 96, 0.45);
+    color: #ff9c9c;
+}
+
+    .draggable-card .delete-btn:hover,
+    .spellbook-card .delete-btn:hover {
+        background: linear-gradient(180deg, #381d24, #241117);
+        color: #ffd3d3;
+        border-color: rgba(255, 96, 96, 0.75);
+    }
+
+/* ---------- BODY ---------- */
+
+.card-body-collapsible {
+    display: block;
+}
+
+.draggable-card hr,
+.spellbook-card hr {
+    border: none;
+    height: 1px;
+    background: rgba(201, 162, 39, 0.16);
+    margin: 18px 0;
+}
+
+/* ---------- GRID LAYOUT ---------- */
+
+.spellbook-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 18px;
+}
+
+.spellbook-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.spellbook-field-wide {
+    grid-column: 1 / -1;
+}
+
+/* fallback for bootstrap-based rows inside older cards */
+.draggable-card .row,
+.spellbook-card .row {
+    --bs-gutter-x: 16px;
+    --bs-gutter-y: 16px;
+}
+
+/* ---------- LABELS ---------- */
+
+
+.card-container .card-label {
+    margin-bottom: 12px !important;
+}
+
+.card-label,
+.spellbook-label,
+.draggable-card label,
+.spellbook-card label {
+    display: block;
+    margin: 0;
+    color: #e7d2a2;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+/* ---------- INPUTS ---------- */
+
+.card-container input[type="text"],
+.card-container input[type="date"],
+.card-container input[type="number"],
+.card-container input[type="email"],
+.card-container select,
+.card-container textarea,
+.card-container .form-control,
+.draggable-card input[type="text"],
+.draggable-card input[type="date"],
+.draggable-card input[type="number"],
+.draggable-card input[type="email"],
+.draggable-card select,
+.draggable-card textarea,
+.spellbook-card input[type="text"],
+.spellbook-card input[type="date"],
+.spellbook-card input[type="number"],
+.spellbook-card input[type="email"],
+.spellbook-card select,
+.spellbook-card textarea,
+.draggable-card .form-control,
+.spellbook-card .form-control {
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(180deg, #172038, #111827) !important;
+    color: #f5e7c2 !important;
+    border: 1px solid rgba(201, 162, 39, 0.32) !important;
+    border-radius: 12px !important;
+    padding: 12px 14px !important;
+    font-family: "Cinzel", serif;
+    font-size: 0.96rem;
+    outline: none;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.22);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+    .spellbook-input::placeholder,
+    .spellbook-textarea::placeholder,
+    .card-container input::placeholder,
+    .card-container textarea::placeholder,
+    .draggable-card input::placeholder,
+    .draggable-card textarea::placeholder,
+    .spellbook-card input::placeholder,
+    .spellbook-card textarea::placeholder {
+        color: rgba(231, 210, 162, 0.5) !important;
+    }
+
+    .spellbook-input:focus,
+    .spellbook-textarea:focus,
+    .spellbook-select:focus,
+    .card-container input:focus,
+    .card-container textarea:focus,
+    .card-container select:focus,
+    .card-container .form-control:focus,
+    .draggable-card input:focus,
+    .draggable-card textarea:focus,
+    .draggable-card select:focus,
+    .spellbook-card input:focus,
+    .spellbook-card textarea:focus,
+    .spellbook-card select:focus,
+    .draggable-card .form-control:focus,
+    .spellbook-card .form-control:focus {
+        border-color: #d7b566 !important;
+        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.14) !important;
+        background: linear-gradient(180deg, #1b2640, #131d31) !important;
+    }
+
+.spellbook-textarea,
+.card-container textarea,
+.draggable-card textarea,
+.spellbook-card textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+/* ---------- CHECKBOX / SMALL META ---------- */
+
+.draggable-card input[type="checkbox"]:not(.future-event-checkbox),
+.spellbook-card input[type="checkbox"]:not(.future-event-checkbox),
+.card-container input[type="checkbox"]:not(.future-event-checkbox) {
+    width: 18px;
+    height: 18px;
+    accent-color: #d7b566;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 4px;
+}
+
+.draggable-card .date-row,
+.draggable-card .future-event-row,
+.draggable-card .bottom-meta-row,
+.spellbook-card .date-row,
+.spellbook-card .future-event-row,
+.spellbook-card .bottom-meta-row {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(201, 162, 39, 0.12);
+}
+
+
+
+.cardCategoryTopDiv_LIP .img-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 38px;
+    padding: 0 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    background: linear-gradient(180deg, #1a2338, #121a2d);
+    color: #f0d79a;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: none;
+}
+
+    .cardCategoryTopDiv_LIP .img-btn:hover {
+        background: linear-gradient(180deg, #22304d, #182238);
+        color: #fff2c7;
+        border-color: rgba(201, 162, 39, 0.5);
+    }
+
+
+.card-container .card-label {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    box-sizing: border-box;
+    padding: 12px 16px !important;
+    margin: 4px 0 16px 0 !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(201, 162, 39, 0.35) !important;
+    background: linear-gradient(180deg, #171f33, #111827) !important;
+    color: #f5e7c2 !important;
+    font-size: 1rem !important;
+    font-family: "Cinzel", serif;
+    outline: none;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+
+    .card-container .card-label::placeholder {
+        color: rgba(231, 210, 162, 0.55) !important;
+    }
+
+    .card-container .card-label:focus {
+        border-color: #d7b566 !important;
+        box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.15) !important;
+        background: linear-gradient(180deg, #1a2338, #131c2e) !important;
+    }
+
+
+
+
+
+/* ---------- IMAGE SLOT SUPPORT ---------- */
+
+.spellbook-image-slot,
+.draggable-card .card-image-slot,
+.spellbook-card .card-image-slot {
+    width: 100%;
+    min-height: 140px;
+    border: 1px dashed rgba(201, 162, 39, 0.26);
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(26, 35, 56, 0.7), rgba(18, 26, 45, 0.78));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(231, 210, 162, 0.55);
+    text-align: center;
+    padding: 16px;
+}
+
+/* ---------- LEGACY HELPERS ---------- */
+
+.spellbook-date-input {
+    max-width: 150px;
+}
+
+.spellbook-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.draggable-card .col-md-6,
+.draggable-card .col-md-4,
+.draggable-card .col-md-3,
+.draggable-card .col-12,
+.spellbook-card .col-md-6,
+.spellbook-card .col-md-4,
+.spellbook-card .col-md-3,
+.spellbook-card .col-12 {
+    margin-bottom: 0;
+}
+
+/* ---------- EMPTY / SUBTEXT ---------- */
+
+.spellbook-help-text,
+.draggable-card .help-text,
+.spellbook-card .help-text,
+.draggable-card small,
+.spellbook-card small {
+    color: rgba(231, 210, 162, 0.68);
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+/* ---------- ANIMATION ---------- */
+
+.draggable-card,
+.spellbook-card {
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+    .draggable-card:hover,
+    .spellbook-card:hover {
+        border-color: rgba(201, 162, 39, 0.42);
+        box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.06), 0 16px 38px rgba(0, 0, 0, 0.4), inset 0 0 18px rgba(255, 255, 255, 0.02);
+    }
+
+
+/* === TOGGLE SWITCH === */
+
+.spellbook-checkbox-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.spellbook-toggle {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+    .spellbook-toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+        position: absolute;
+    }
+
+.spellbook-slider {
+    position: absolute;
+    inset: 0;
+    cursor: pointer;
+    background: linear-gradient(180deg, #1a2338, #121a2d);
+    border: 1px solid rgba(201, 162, 39, 0.35);
+    border-radius: 999px;
+    transition: 0.2s ease;
+}
+
+    .spellbook-slider::before {
+        content: "";
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        left: 3px;
+        top: 3px;
+        border-radius: 50%;
+        background: #d7b566;
+        transition: 0.2s ease;
+    }
+
+.spellbook-toggle input:checked + .spellbook-slider {
+    background: linear-gradient(180deg, #2a3a5c, #1b2740);
+    border-color: rgba(201, 162, 39, 0.6);
+}
+
+    .spellbook-toggle input:checked + .spellbook-slider::before {
+        transform: translateX(18px);
+    }
+
+.spellbook-toggle-label {
+    color: #e7d2a2;
+    font-size: 0.9rem;
+}
+
+
+
+/* ---------- RESPONSIVE ---------- */
+
+@media (max-width: 900px) {
+    .spellbook-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .spellbook-field-wide {
+        grid-column: auto;
+    }
+
+    .draggable-card,
+    .spellbook-card {
+        padding: 18px 16px;
+    }
+
+        .draggable-card .card-header,
+        .spellbook-card-header,
+        .draggable-card .date-row,
+        .draggable-card .future-event-row,
+        .draggable-card .bottom-meta-row,
+        .spellbook-card .date-row,
+        .spellbook-card .future-event-row,
+        .spellbook-card .bottom-meta-row {
+            flex-direction: column;
+            align-items: stretch;
+        }
+}
+
+
+
+
+@media (max-width: 600px) {
+    .draggable-card h3,
+    .draggable-card h4,
+    .draggable-card .card-title,
+    .spellbook-card-title {
+        font-size: 1.2rem;
+    }
+
+    .drag-handle,
+    .draggable-card .collapse-toggle,
+    .draggable-card .delete-btn,
+    .draggable-card .icon-btn,
+    .draggable-card .card-action-btn,
+    .spellbook-card .collapse-toggle,
+    .spellbook-card .delete-btn,
+    .spellbook-card .icon-btn,
+    .spellbook-card .card-action-btn {
+        min-width: 34px;
+        height: 34px;
+    }
+
+
+
+    
+
+    /*-----------duuuuude are you looking at my css again? Crazy. This is not for your eyes.-----------------------*/
+}

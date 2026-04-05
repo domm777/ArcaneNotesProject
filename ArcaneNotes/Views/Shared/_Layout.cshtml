@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    @RenderSection("Styles", required: false)
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ArcaneNotes</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap -->
+
+
+</head>
+
+<body>
+    <!-- Google Login -->
+    <!--   REMOVED this but kept in code in case someone needed it. At this stage you are already signed in, so we dont need this button and function here. - Mac
+
+    <div id="google-login-section" class="text-center mt-3">
+        <div id="g_id_onload"
+             data-client_id="1034870275814-e93jmfc5d4402a5on917k0t3amku209f.apps.googleusercontent.com"
+             data-callback="handleGoogleCredential" data-auto_prompt="false">
+        </div>
+
+        <div class="g_id_signin" data-type="standard" data-shape="pill" data-theme="outline" data-text="signin_with"
+             data-size="large">
+        </div>
+    </div>
+    -->
+
+    <div class="container workspace-layout-container">
+        <main role="main" class="pb-3 workspace-layout-body">
+            @RenderBody()
+        </main>
+        
+        <div class="Main_GM_Session_Create workspace-layout-gm-section">
+            @RenderSection("GM_Session_Notes", required: false)
+        </div>
+        
+        @* <div class="LeftSideBar workspace-layout-sidebar-below"> *@
+        @* <div class="LeftSideBar">
+            @RenderSection("Left_Side_Bar", required: false)
+        </div> *@
+
+        <div class="RightSideBar workspace-layout-sidebar-right">
+            @RenderSection("Right_Side_Bar", required: false)
+        </div>
+    </div>
+
+    <!-- Vendor scripts -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
+
+    <!-- Global app logic (must load BEFORE theme script) -->
+    <script src="~/js/app.js" asp-append-version="true"></script>
+    <script type="module" src="~/js/ExportedFunctions.js" asp-append-version="true"></script>
+
+    <script>
+        // Initialize Sortable
+        document.addEventListener('DOMContentLoaded', function () {
+            var el = document.getElementById('formContainer');
+            if (el) {
+                var sortable = Sortable.create(el, {
+                    group: 'shared-lists',
+                    animation: 150,
+                    emptyInsertThreshold: 50,
+                    handle: '.drag-handle',
+                    ghostClass: 'bg-light'
+                });
+            }
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

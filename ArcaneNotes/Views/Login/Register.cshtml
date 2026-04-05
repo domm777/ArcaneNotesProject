@@ -1,0 +1,64 @@
+﻿@model RegisterViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+}
+
+<div class="login-page">
+    <div class="login-box">
+        <h2>Register for Arcane Notes</h2>
+
+        <form asp-action="Register" method="post">
+            <div class="login-field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" autocomplete="username" aria-required="true" />
+            </div>
+
+            <div class="login-field">
+                <label asp-for="Password">Password</label>
+                <div class="password-input-wrapper">
+                    <input asp-for="Password" type="password" class="form-control" id="passwordInput" autocomplete="new-password" aria-required="true" />
+                    <button type="button" class="peek-btn" onclick="togglePasswordVisibility('passwordInput')">👁️</button>
+                </div>
+            </div>
+
+            <div class="login-field">
+                <label asp-for="ConfirmPassword">Confirm Password</label>
+                <div class="password-input-wrapper">
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" id="confirmPasswordInput" />
+                    <button type="button" class="peek-btn" onclick="togglePasswordVisibility('confirmPasswordInput')">👁️</button>
+                </div>
+            </div>
+
+            <button type="submit">Register</button>
+            <br />
+            <br />
+            <a href="/Login/Login" class="btn btn-gm btn-lg px-5 py-3 fs-3 fw-bold">Login</a>
+
+            @* @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0) {
+                <div id="loginError" class="login-error-pill">
+                    <span class="login-error-pill-text">Registration Failed - @ViewData.ModelState.Values.FirstOrDefault()?.Errors.FirstOrDefault()?.ErrorMessage</span>
+                    <button type="button" class="close-btn" onclick="closeLoginError()">X</button>
+                </div>
+            } *@
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function togglePasswordVisibility(inputId) {
+            const input = document.getElementById(inputId);
+            const isPassword = input.type === "password";
+            input.type = isPassword ? "text" : "password";
+        }
+
+        function closeLoginError() {
+            const error = document.getElementById("loginError");
+            if (error) {
+                error.style.display = "none";
+            }
+        }
+    </script>
+}

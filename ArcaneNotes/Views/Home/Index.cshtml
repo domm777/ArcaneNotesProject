@@ -1,0 +1,98 @@
+﻿@model HomeViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/mainstyle.css" asp-append-version="true" />
+}
+
+<div class="main-page">
+    <div class="main-card">
+        <div class="main-card__header">
+            <h1 class="main-card__title">Home Screen</h1>
+            <p class="main-card__subtitle">Create or open a workspace</p>
+        </div>
+
+        <div class="main-card__body">
+            <section class="workspace-create-section">
+                <form asp-action="CreateWorkSpace" method="post" class="workspace-form">
+                    <div class="form-group">
+                        <label asp-for="title" class="form-label">Workspace Title</label>
+                        <input asp-for="title" type="text" class="form-input" placeholder="Enter workspace title" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="gmName" class="form-label">Workspace GM Name</label>
+                        <input asp-for="gmName" type="text" class="form-input" placeholder="Enter GM name" />
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="main-button">Create Workspace</button>
+						
+                        
+                    </div>
+                </form>
+            </section>
+
+            <section class="workspace-list-section">
+
+                <div class="workspace-panel">
+                    <h2 class="section-title">@User.Identity?.Name's Workspaces</h2>
+
+                    @if (Model.MyWorkspaces != null && Model.MyWorkspaces.Any())
+                    {
+                        <div class="workspace-list">
+                            @foreach (var workspace in Model.MyWorkspaces)
+                            {
+                                <a asp-action="OpenWorkSpace"
+                                   asp-route-workSpace="@workspace.Id"
+                                   class="workspace-link">
+                                    @workspace.Title
+                                    
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="empty-state">No workspaces yet.</p>
+                    }
+                </div>
+
+                <div class="workspace-panel">
+                    <h2 class="section-title">@User.Identity?.Name's Collaborations</h2>
+
+                    @if (Model.Collaborations != null && Model.Collaborations.Any())
+                    {
+                        <div class="workspace-list">
+                            @foreach (var workspace in Model.Collaborations)
+                            {
+                                <a asp-action="OpenWorkSpace"
+                                   asp-route-workSpace="@workspace.Id"
+                                   class="workspace-link">
+                                    @workspace.Title
+                                </a>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="empty-state">No collaborations yet.</p>
+                    }
+                </div>
+
+            </section>
+
+            <div class="logout-bottom">
+                <form asp-controller="Login" asp-action="Logout" method="post">
+                    <button type="submit" class="logout-button">
+                        Logout
+                    </button>
+                </form>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,828 @@
+
+
+
+/*----TO TELL YOU THE TRUTH, WE CAN PROBABLY REMOVE THIS CSS FILE, I AM SLOWLY WORKIGN AWAY AT IT - MAC*/
+
+
+:root {
+    --bg-dark: #0f0f0f;
+    --parchment: #f4e4c1;
+    --blood-red: #8b0000;
+    --gold: #c9a227;
+    --text-light: #f5f5f5;
+}
+
+body {
+    background-color: #0d0d0d;
+    color: #f5f5f5;
+    font-family: 'Ubuntu', sans-serif;*/
+    margin: 0;
+    font-family: 'Cinzel', serif;
+
+}
+
+h1,
+h2,
+h5 {
+    color: #fff;
+}
+
+/*!ai style*/
+h1 {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    text-align: center;
+    color: var(--gold);
+    text-shadow: 0 0 8px rgba(201, 162, 39, 0.6);
+    margin-bottom: 30px;
+}
+
+.container {
+    max-width: 700px;
+    margin: auto;
+    padding: 40px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+/*.container {
+    /*    border: 2px solid var(--gold);*/
+/*    box-shadow: 0 0 50px rgba(201, 162, 39, 0.15);
+}*/
+
+
+.card {
+    background-color: #1a1a1a !important;
+    border: 1px solid #333 !important;
+    color: #f5f5f5;
+}
+
+input,
+textarea {
+    background-color: #1c1c1c !important;
+    color: #fff !important;
+    border: 1px solid #555 !important;
+}
+
+/*!ai style*/
+input {
+    background-color: #1c1c1c;
+    border: 2px solid var(--gold);
+    padding: 10px;
+    color: var(--parchment);
+    border-radius: 6px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 15px;
+    font-family: 'Cinzel', serif;
+}
+
+.navbar {
+    background-color: #111 !important;
+    border-bottom: 2px solid #cc0000 !important;
+}
+
+html,
+body {
+    transition: background-color 0.6s, color 0.6s;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#formContainer {
+    margin-top: auto;
+    /*    border-radius: 25px;*/
+}
+
+
+
+.AppTitle {
+    /*    padding-top: 50px;*/
+    margin-top: 30px;
+}
+
+/*================================ */
+/*        RENDER SECTIONS          */
+/* =============================== */
+/*.LeftSideBar {
+    width: auto;
+    position: fixed;
+    top: 100px;
+    bottom: 100px;
+    left: 250px;*/
+/*  background-color: lightblue;*/
+/*}*/
+.User_WorkSpace_Tile {
+    background-color: #101010;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: auto;
+    border-radius: 35px;
+    width: auto;
+}
+.UsersWorkSpace {
+    width: auto;
+}
+
+/*================================ */
+/*        CONTAINOR                */
+/* =============================== */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/*================================ */
+/*        IMAGE SCROLLS            */
+/* =============================== */
+
+#DivTitleImageScroll {
+    /*    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: -1;*/
+    margin-top: 50px;
+    margin-bottom: 150px;
+}
+
+#TitleImageScroll {
+    width: 480px;
+    margin-top: -350px;
+    padding-top: -150px;
+    position: relative;
+    left: 0px;
+    top: 250px;
+    z-index: -1;
+}
+
+#ImageCardInColumn {
+    width: 480px;
+    margin-top: -400px;
+    padding-top: -100px;
+    position: relative;
+    left: 0px;
+    top: 250px;
+    z-index: -1;
+}
+
+/*================================ */
+/*        CARD CONTAINERS          */
+/* =============================== */
+/* --- Container --- */
+.card-container {
+    width: 100%;
+    margin-bottom: 1rem;
+    background-color: #1c1c1c;
+    border-radius: 25px;
+    padding: 20px;
+}
+
+/* --- Draggable Card Wrapper --- */
+.dragableDiv {
+    background: #1a1a1a !important;
+    border-radius: 6px;
+    padding: 0.75rem;
+    position: relative;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/*ms-auto d-flex gap-2*/
+.cardButtonDiv {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.cardLabelDiv {
+    display: inline;
+}
+
+/* --- Top Bar (Category Header) --- */
+.cardCategoryTopDiv_LIP {
+    display: flex;
+    gap: 0.75rem;
+    display: flex;
+    padding: 0.25rem 0;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+/* Left side: drag handle + title */
+.categoryLabelDiv {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.drag-handle {
+    cursor: grab;
+    color: #888;
+    font-size: 1.4rem;
+}
+
+/* Custom label input */
+#customLabelInput {
+    margin-top: 10px;
+    padding: 4px 6px;
+    font-size: 0.85rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Right side buttons */
+.cardCategoryTopDiv_LIP .btn {
+    padding: 2px 6px;
+    font-size: 0.75rem;
+}
+
+/* --- Collapsible Body --- */
+.card-body-collapsible {
+    margin-top: 0.5rem;
+}
+
+    .card-body-collapsible hr {
+        margin: 1rem 0;
+    }
+
+    /* --- Date + Future Event Row --- */
+    .card-body-collapsible .container {
+        padding: 0;
+    }
+
+    .card-body-collapsible input[type="date"] {
+        width: 135px;
+        height: 25px;
+        padding: 2px 6px;
+        font-size: 0.85rem;
+    }
+
+
+
+.card-body-collapsible label {
+    font-size: 0.8rem;
+    line-height: 1.1;
+}
+
+/* --- Image Spot --- */
+.image-spot {
+    width: 100%;
+    min-height: 80px;
+    background: #1a1a1a !important;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    margin-top: 1rem;
+}
+
+/*imageUploadDiv image-preview mt-2 text-center position-relative*/
+.imageUploadDiv {
+    margin-top: 1rem;
+    text-align: center;
+    position: relative;
+}
+
+    .imageUploadDiv p {
+        display: inline;
+    }
+
+/* =============================== */
+/*          Text Fields            */
+/* =============================== */
+.Title_Label_Input {
+    width: 100%;
+    margin: auto;
+}
+
+    .Title_Label_Input input {
+        width: 100%;
+        margin: auto;
+    }
+
+.Name_Label_Input {
+    width: 100%;
+    margin: auto;
+}
+
+    .Name_Label_Input input {
+        width: 100%;
+        margin: auto;
+    }
+
+/* #noteTitle {
+    /*    width: 100%;
+    margin: auto;
+} */
+
+
+/* =============================== */
+/*          BUTTONS                */
+/* =============================== */
+/*btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-2*/
+.CameraButtonCancel {
+    /* Matches: btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-2 */
+    position: absolute;
+    top: -20px;
+    right: 0;
+    /*    display: inline-block;*/
+    font-size: 0.875rem;
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    background: transparent;
+    border-radius: 0.25rem;
+    margin: 0.5rem;
+    /* m-2 */
+    cursor: pointer;
+    justify-content: flex-end;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+/*!ai world btn*/
+button {
+    background-color: transparent;
+    border: 2px solid var(--blood-red);
+    color: var(--blood-red);
+    padding: 8px 16px;
+    margin: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Cinzel', serif;
+    transition: all 0.3s ease;
+}
+
+    button:hover {
+        background-color: var(--blood-red);
+        color: white;
+        box-shadow: 0 0 10px rgba(139, 0, 0, 0.8);
+    }
+
+
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    border: 1px solid #cc0000;
+    background-color: #000;
+    color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.2s ease;
+}
+
+    .btn:hover {
+        background-color: #cc0000;
+        color: #fff;
+        box-shadow: 0 0 25px rgba(204, 0, 0, 0.6);
+        transform: scale(1.05);
+    }
+
+/* Special GM and Player Buttons */
+.btn-gm {
+    background-color: #000;
+    border: 2px solid #cc0000;
+    color: #cc0000;
+}
+
+    .btn-gm:hover {
+        background-color: #cc0000;
+        color: #fff;
+        box-shadow: 0 0 25px rgba(255, 0, 0, 0.6);
+        transform: scale(1.07);
+    }
+
+.btn-player {
+    background-color: #000;
+    border: 2px solid #4444ff;
+    color: #fff;
+}
+
+    .btn-player:hover {
+        background-color: #4444ff;
+        color: #fff;
+        box-shadow: 0 0 25px rgba(68, 68, 255, 0.6);
+        transform: scale(1.07);
+    }
+
+/* Success / Secondary Buttons */
+.btn-success {
+    border-color: #cc0000;
+    background-color: #111;
+    color: #fff;
+}
+
+.btn-outline-primary {
+    color: #cc0000;
+    border-color: #cc0000;
+}
+
+    .btn-outline-primary:hover {
+        background-color: #cc0000;
+        color: #fff;
+    }
+
+/* Theme toggle button */
+.btn-outline-secondary {
+    border-color: #cc0000;
+    color: #cc0000;
+}
+
+    .btn-outline-secondary:hover {
+        background-color: #cc0000;
+        color: #fff;
+    }
+
+.note-remove {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    padding: 2px 6px;
+    font-size: 0.9rem;
+    border-radius: 50%;
+}
+
+
+/* === Player Form specific overrides === */
+body.player-form .btn {
+    background-color: #000;
+    border: 2px solid #4444ff;
+    color: #4444ff;
+}
+
+    body.player-form .btn:hover {
+        background-color: #4444ff;
+        color: #fff;
+        box-shadow: 0 0 25px rgba(68, 68, 255, 0.6);
+        transform: scale(1.05);
+    }
+
+/* === Arcane Popup === */
+.arcane-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.popup-content {
+    background: #1a1a1a;
+    color: #fff;
+    border: 2px solid #cc0000;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.4);
+    padding: 30px 40px;
+    max-width: 400px;
+    text-align: center;
+    font-size: 1.2rem;
+    animation: popScale 0.25s ease forwards;
+}
+
+/* Light mode overrides */
+[data-theme="light"] .popup-content {
+    background: #fff;
+    color: #111;
+    border: 2px solid #007bff;
+    box-shadow: 0 0 25px rgba(0, 102, 255, 0.3);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes popScale {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+footer {
+    text-align: center;
+    padding: 8px 0;
+    font-size: 0.85rem;
+    color: #aaa;
+    opacity: 0.6;
+}
+
+
+/* === Theme Toggle Button === */
+.btn-theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    width: 60px;
+    height: 60px;
+    background-color: transparent;
+    color: #aaa;
+    border: 2px solid #00b300;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.2s ease-in-out;
+}
+
+    .btn-theme-toggle:hover {
+        color: #fff;
+        background-color: #00b300;
+        border-color: #00b300;
+        box-shadow: 0 0 25px rgba(0, 255, 0, 0.6);
+        transform: scale(1.05);
+    }
+
+    .btn-theme-toggle:active {
+        transform: scale(0.98);
+    }
+
+
+
+
+.image-preview {
+    border: 1px dashed #555;
+    border-radius: 8px;
+    padding: 8px;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 8px;
+}
+
+.card.drag-hover {
+    border-color: #cd0a00ff !important;
+    box-shadow: 0 0 15px rgba(211, 0, 0, 0.47);
+}
+
+.card.drag-hover {
+    border: 2px dashed #00ff00 !important;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+}
+
+.btn-image {
+    padding: 2px 6px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    line-height: 1;
+}
+
+.note-tools {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    gap: 4px;
+    z-index: 10;
+}
+
+    .note-tools .btn {
+        padding: 2px 4px;
+        /* smaller padding = same height */
+        font-size: 0.8rem;
+        border-radius: 6px;
+        line-height: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* centers + and x perfectly */
+    }
+
+.drag-handle {
+    cursor: grab;
+    user-select: none;
+    /* Prevents highlighting the icon text */
+    margin-right: 10px;
+}
+
+    /* Change cursor while actively dragging */
+    .drag-handle:active {
+        cursor: grabbing;
+    }
+
+.squircle-btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 12px;
+    /* squircle-like */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    line-height: 1;
+}
+
+.card-body-collapsible {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.card-label {
+    width: 100%;
+}
+
+input.card-label {
+    font-size: 1.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+    input.card-label:focus {
+        outline: none !important;
+        box-shadow: none !important;
+        border: 0 !important;
+        border-bottom: 2px solid #0d6efd !important;
+        background-color: rgba(0, 0, 0, 0.05) !important;
+    }
+
+    input.card-label:hover {
+        border: 0 !important;
+        border-bottom: 2px solid #0d6efd !important;
+        background-color: rgba(0, 0, 0, 0.03) !important;
+    }
+
+/*================================ */
+/*    MEDIA SCREEN LEFT SIDEBAR    */
+/* =============================== */
+
+/* light pink background */
+@media (max-width: 500px) {
+    .LeftSideBar {
+        width: 150px;
+        position: fixed;
+        top: 100px;
+        bottom: 100px;
+        left: 0px;
+        background-color: lightpink;
+    }
+
+    .container {
+        max-width: 700px;
+        margin: auto;
+        padding: 40px;
+        padding-left: 150px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    .mainFormNotes {
+        max-width: 700px;
+    }
+}
+
+/* light green background */
+@media (min-width: 501px) and (max-width: 999px) {
+    .container {
+        width: fit-content;
+        display: inline;
+    }
+
+    .LeftSideBar {
+        background-color: lightseagreen;
+    }
+}
+
+/* light steel background */
+@media (min-width: 1000px) and (max-width: 1100px) {
+    .container {
+        width: fit-content;
+        display: inline;
+    }
+
+    .LeftSideBar {
+        margin: auto;
+        /*        width: 500px;*/
+        position: fixed;
+        top: 100px;
+        bottom: 100px;
+        left: 0px;
+        background-color: lightsteelblue;
+    }
+}
+
+/* dark blue background */
+@media (min-width: 1101px) and (max-width: 1250px) {
+    .container {
+        width: fit-content;
+        display: inline;
+    }
+
+    .LeftSideBar {
+        margin: auto;
+        /*        width: 500px;*/
+        position: fixed;
+        top: 100px;
+        bottom: 100px;
+        left: 10px;
+        background-color: darkblue;
+    }
+}
+
+/* dark slate gray background */
+@media (min-width: 1251px) and (max-width: 1544px) {
+    .container {
+        width: fit-content;
+        display: inline;
+    }
+
+    .LeftSideBar {
+        margin: auto;
+        /*width: 500px;*/
+        position: fixed;
+        top: 100px;
+        bottom: 100px;
+        left: 100px;
+        background-color: darkslategray;
+    }
+}
+
+/* light salmon background */
+@media (min-width: 1545px) {
+    .container {
+        width: fit-content;
+        display: inline;
+    }
+
+    .LeftSideBar {
+        width: auto;
+        position: fixed;
+        top: 100px;
+        bottom: 100px;
+        left: 250px;
+        background-color: lightsalmon;
+    }
+}
+
+
+
+/*================================ */
+/*        MEDIA SCREEN GENERAL     */
+/* =============================== */
+
+@media (min-width: 577px) {
+    .mainFormNotes {
+        width: 600px;
+    }
+
+    main {
+        max-width: 600px;
+    }
+
+    #customLabelInput {
+        width: 100%;
+    }
+}
+
+@media (min-width: 0px) and (max-width: 576px) {
+
+    /* Adjust card container padding on small screens */
+    .card-container {
+        padding: 0 0.5rem;
+    }
+
+    /* Adjust input width on small screens */
+    #customLabelInput {
+        width: 100%;
+    }
+}

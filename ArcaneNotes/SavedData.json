@@ -1,0 +1,49 @@
+{
+  "Title": "Main test",
+  "Name": "Test Name",
+  "Type": "GM",
+  "NoteData":[
+    {
+      "CardType": "Container",
+      "Date": "2026-10-10",
+      "FutureEvent": false,
+      "Images": null,
+      "Children": [
+        {
+          "CardType": "Container",
+          "Date": "2026-10-10",
+          "FutureEvent": false,
+          "Images": null,
+          "Children": [
+            {
+              "CardType": "ISW",
+              "Date": "2026-10-10",
+              "FutureEvent": true,
+              "ItemName": "cool item",
+              "Category": "Swords"
+            }
+          ]
+        },
+        {
+          "CardType": "Location",
+          "Date": "2026-10-10",
+          "FutureEvent": false,
+          "WhereYouMet": "That Place",
+          "Images": []
+        }
+      ]
+    },
+    {
+      "CardType": "NPC",
+      "Date": "2026-10-10",
+      "FutureEvent": true,
+      "CardData": {
+        "Name": "Person",
+        "LocationMet": "Over there",
+        "WhatSaid": "Hello how are you",
+        "RelationShip": "Friend",
+        "Images": []
+      }
+    }
+  ]
+}

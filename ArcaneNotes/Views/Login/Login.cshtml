@@ -1,0 +1,57 @@
+@model LoginViewModel
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/login.css" asp-append-version="true" />
+}
+
+<div class="login-page">
+    <div class="login-box">
+        <h2>Login to Arcane Notes</h2>
+
+        <form asp-action="Login" method="post">
+            <div class="login-field">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+            </div>
+
+            <div class="login-field">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" type="password" class="form-control" />
+            </div>
+
+            <div class="remember-toggle">
+                <label class="switch">
+                    <input asp-for="RememberMe" />
+                    <span class="slider"></span>
+                </label>
+                <label asp-for="RememberMe" class="remember-label">Remember Me</label>
+            </div>
+
+            <button type="submit">Login</button>
+            <br />
+            <br />
+            <p>OR</p>
+            <a href="/Login/Register" class="btn btn-gm btn-lg px-5 py-3 fs-3 fw-bold">Register</a>
+
+
+            @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)
+            {
+                <div id="loginError" class="login-error-pill">
+                    <span class="login-error-pill-text">Invalid Login</span>
+                    <button type="button" class="close-btn" onclick="closeLoginError()">X</button>
+                </div>
+            }
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function closeLoginError() {
+            const error = document.getElementById("loginError");
+            if (error) {
+                error.style.display = "none";
+            }
+        }
+    </script>
+}

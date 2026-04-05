@@ -1,5 +1,5 @@
 ﻿.LeftSideBar {
-    padding: 40px 42px;
+    margin-top:0px;
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(20, 28, 48, 0.96), rgba(11, 16, 30, 0.96));
     border: 1px solid rgba(201, 162, 39, 0.45);
@@ -24,6 +24,7 @@
         margin-bottom: 50px;
     }
 }
+
 @media (min-width: 1440px) and (max-width: 2189px) {
     .LeftSideBar {
         /*        display: none;*/
@@ -62,7 +63,7 @@
         width: auto;
         top: 200px;
         bottom: 100px;
-        left: 20px;
+        left: 130px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightslategray;
@@ -75,7 +76,7 @@
         width: auto;
         top: 200px;
         bottom: 100px;
-        left: 100px;
+        left: 200px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightpink;
@@ -162,7 +163,7 @@
         position: fixed;
         top: 200px;
         bottom: 100px;
-        left: 250px;
+        left: 500px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightsalmon;
@@ -175,7 +176,7 @@
         position: fixed;
         top: 200px;
         bottom: 100px;
-        left: 750px;
+        left: 1300px;
         border-radius: 28px;
         padding: 20px;
         background-color: navajowhite;

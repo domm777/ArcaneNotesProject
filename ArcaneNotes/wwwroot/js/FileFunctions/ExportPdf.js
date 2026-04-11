@@ -10,23 +10,30 @@ function showPopup(message) {
     msg.textContent = message;
     popup.style.display = "flex";
 
-    closeBtn.onclick = () => (popup.style.display = "none");
+    closeBtn.onclick = () => {
+        popup.style.display = "none";
+    };
+
     popup.onclick = (e) => {
-        if (e.target === popup) popup.style.display = "none";
+        if (e.target === popup) {
+            popup.style.display = "none";
+        }
     };
 }
 
 export async function ExportPDF(role = "GM") {
     const today = new Date();
-    const dateString = today.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    }).replace(/\//g, "-");
+    const dateString = today
+        .toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+        })
+        .replace(/\//g, "-");
 
     const currentNote = GetCurrentNoteData();
 
-    const hasCards = currentNote?.NoteData?.length > 0;
+    const hasCards = Array.isArray(currentNote?.NoteData) && currentNote.NoteData.length > 0;
     const hasHeader =
         (currentNote?.Title || "").trim() !== "" ||
         (currentNote?.Name || "").trim() !== "";
@@ -45,28 +52,35 @@ export async function ExportPDF(role = "GM") {
         noteData: currentNote.NoteData || []
     };
 
-    const res = await fetch("/Notes/ExportPdf", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    });
+    try {
+        const res = await fetch("/Notes/ExportPdf", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
 
-    if (!res.ok) {
-        const errorText = await res.text();
-        console.error("PDF generation failed:", errorText);
-        alert("PDF generation failed!");
-        return;
+        if (!res.ok) {
+            const errorText = await res.text();
+            console.error("PDF generation failed:", errorText);
+            showPopup("PDF generation failed. Please try again.");
+            return;
+        }
+
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `${dateString}.pdf`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("PDF export crashed:", error);
+        showPopup("PDF export crashed. Check the console for details.");
     }
-
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${dateString}.pdf`;
-    a.click();
-
-    URL.revokeObjectURL(url);
 }

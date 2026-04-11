@@ -6,35 +6,34 @@
     box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.10), 0 18px 50px rgba(0, 0, 0, 0.45), inset 0 0 35px rgba(255, 255, 255, 0.03);
     box-sizing: border-box;
     position: sticky;
-    left: 300px;
+    width: 350px;
+/*    left: 300px;*/
 }
 
-@media (min-width: 0px) and (max-width: 1439px) {
+@media (min-width: 0px) and (max-width: 1999px) {
     .LeftSideBar {
-        /* display: none;*/
+        display: none;
         position: absolute;
         width: auto;
         position: fixed;
         top: 20px;
-        /* bottom: 0px;*/
+         bottom: 0px;
         left: 20px;
         right: 20px;
         border-radius: 28px;
         padding: 20px;
         margin-bottom: 25px;
+        background-color: darkcyan;
     }
 }
 
-@media (min-width: 1440px) and (max-width: 2189px) {
+@media (min-width: 2000px) and (max-width: 2189px) {
     .LeftSideBar {
-        /* display: none;*/
-        position: absolute;
-        width: auto;
         position: fixed;
-        top: 20px;
-        /* bottom: 0px;*/
-        left: 20px;
-        right: 20px;
+        width: 300px;
+        top: 200px;
+        bottom: 100px;
+        left: 0px;
         border-radius: 28px;
         padding: 20px;
         margin-bottom: 25px;
@@ -47,7 +46,6 @@
     .LeftSideBar {
         /* display: inherit;*/
         position: fixed;
-        width: auto;
         top: 200px;
         bottom: 100px;
         left: 20px;
@@ -61,10 +59,9 @@
 @media (min-width: 2225px) and (max-width: 2529px) {
     .LeftSideBar {
         position: fixed;
-        width: auto;
         top: 200px;
         bottom: 100px;
-        left: 70px;
+        left: 90px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightslategray;
@@ -75,10 +72,9 @@
 @media (min-width: 2530px) and (max-width: 2629px) {
     .LeftSideBar {
         position: fixed;
-        width: auto;
         top: 200px;
         bottom: 100px;
-        left: 150px;
+        left: 170px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightpink;
@@ -161,24 +157,47 @@
 /* light salmon background : */
 @media (min-width: 2630px) and (max-width: 3339px) {
     .LeftSideBar {
-        width: auto;
         position: fixed;
         top: 200px;
         bottom: 100px;
-        left: 300px;
+        left: 330px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightsalmon;
     }
 }
-/* light salmon background : */
+/* navajowhite background : */
 @media (min-width: 3340px) and (max-width: 5007px) {
     .LeftSideBar {
-        width: auto;
         position: fixed;
         top: 200px;
         bottom: 100px;
-        left: 780px;
+        left: 800px;
+        border-radius: 28px;
+        padding: 20px;
+        background-color: navajowhite;
+    }
+}
+
+@media (min-width: 5008px) {
+    .LeftSideBar {
+        position: fixed;
+        top: 200px;
+        bottom: 100px;
+        left: 1780px;
+        border-radius: 28px;
+        padding: 20px;
+        background-color: navajowhite;
+    }
+}
+
+/* navajowhite background : */
+@media (min-width: 6008px){
+    .LeftSideBar {
+        position: fixed;
+        top: 200px;
+/*        bottom: 100px;*/
+        left: 2720px;
         border-radius: 28px;
         padding: 20px;
         background-color: navajowhite;

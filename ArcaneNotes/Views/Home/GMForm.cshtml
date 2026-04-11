@@ -6,11 +6,12 @@
 <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
-
+<link rel="stylesheet" href="~/css/sidebar-toggle.css" asp-append-version="true" />
 @section GM_Session_Notes {
     <div class="workspace-page" spellcheck="false">
         <div class="workspace-main-shell">
-            <div class="LeftSideBar">
+            
+            <div class="LeftSideBar" id="leftSidebar">
                 <div class="workspace-info-data-field">
                     <h4>Title: @Model.currentWorkSpace.Title GameMaster: @Model.currentWorkSpace.GMName</h4>
                 </div>
@@ -47,6 +48,9 @@
                 </div>
             </div>
             <div class="workspace-card">
+                <button id="sidebarToggle" class="floating-toggle" aria-label="Toggle sidebar">
+                    <span class="toggle-icon">≡</span>
+                </button>
                 <div class="workspace-card-inner">
 
                     <div class="workspace-title-block">
@@ -252,6 +256,22 @@
         } else {
             console.error("ExportedFunctions failed to attach to the window object.");
         }
+
+        (function (){
+            const btn = document.getElementById('sidebarToggle');
+            const sidebar = document.getElementById('leftSidebar');
+            if (!btn || !sidebar) return;
+
+            // Ensure the sidebar starts visible (no 'hidden' class)
+            sidebar.classList.remove('hidden');
+
+            btn.addEventListener('click', function () {
+                const isNowVisible = !sidebar.classList.toggle('hidden');
+                // reflect state on body for easier styling
+                document.body.classList.toggle('sidebar-open', isNowVisible);
+                btn.classList.toggle('toggled', isNowVisible);
+            });
+        })();
     </script>
 }
 <script src="https://accounts.google.com/gsi/client" async defer></script>

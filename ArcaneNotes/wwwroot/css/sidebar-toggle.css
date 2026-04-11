@@ -1,0 +1,43 @@
+/* Hamburger menu button */
+.floating-toggle {
+    position: relative;
+    left: 0px;
+    top: 10px;
+    transform: translateY(-50%);
+    z-index: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 25px;
+    background: linear-gradient(180deg, rgba(20, 28, 48, 0.50), rgba(11, 16, 30, 0.50));
+    border: 1px solid rgba(0,0,0,0.12);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0;
+    font-size: 20px;
+}
+
+.floating-toggle .toggle-icon {
+    line-height: 1;
+    user-select: none;
+}
+
+/* Sidebar hidden state */
+/*.LeftSideBar {*/
+    /* visible by default */
+    /*opacity: 1;
+    transition: opacity 0.18s ease-in-out;
+}*/
+
+/* Sidebar hidden state: do not shift, just hide */
+.LeftSideBar.hidden {
+    opacity: 0;
+    display: none !important;
+}
+
+/* When sidebar is visible, nudge the toggle button to the right of it to avoid overlap */
+/*.sidebar-open .floating-toggle {
+    left: 320px;*/ /* sidebar width (300px) + gap */
+/*}*/

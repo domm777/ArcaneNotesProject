@@ -457,11 +457,19 @@ body {
 
 /*-----------------------------------------TABLET-------------------------------------------------*/
 
-@media (min-width: 0px) and (max-width: 2279px) {
+@media (min-width: 0px) and (max-width: 1999px) {
+    /*.workspace-main-shell {*/
+        /*        display: inline-block;*/
+        /*width: min(100%, 1400px);
+        margin: 180px auto;
+    }*/
+}
+
+@media (min-width: 2000px) and (max-width: 2189px) {
     .workspace-main-shell {
 /*        display: inline-block;*/
         width: min(100%, 1400px);
-        margin: 200px auto;
+        margin: auto;
     }
 }
 

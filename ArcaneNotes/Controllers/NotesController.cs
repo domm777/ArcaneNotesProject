@@ -1,12 +1,11 @@
 ﻿using ArcaneNotes.Models;
-using DnDSessionNotes.Models;
 using Microsoft.AspNetCore.Mvc;
 using QuestPDF.Fluent;
 using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System.Globalization;
 
-namespace DnDSessionNotes.Controllers
+namespace ArcaneNotes.Controllers
 {
 	[IgnoreAntiforgeryToken]
 	public class NotesController : Controller
@@ -28,7 +27,7 @@ namespace DnDSessionNotes.Controllers
 
 		[HttpPost]
 		[Route("/Notes/ExportPdf")]
-		public IActionResult ExportPdf([FromBody] PdfExportPayload payload)
+		public async Task<IActionResult> ExportPdf([FromBody] PdfExportPayload? payload)
 		{
 			payload ??= new PdfExportPayload();
 			QuestPDF.Settings.License = LicenseType.Community;
@@ -65,7 +64,7 @@ namespace DnDSessionNotes.Controllers
 
 					page.Content().PaddingTop(10).Column(col =>
 					{
-						if (payload.NoteData == null || !payload.NoteData.Any())
+						if (payload.NoteData == null || payload.NoteData.Count == 0)
 						{
 							col.Item().PaddingTop(20).Text("No note content found.")
 								.FontSize(12)
@@ -87,16 +86,20 @@ namespace DnDSessionNotes.Controllers
 				});
 			});
 
-			var stream = new MemoryStream();
-			pdf.GeneratePdf(stream);
+			await using var stream = new MemoryStream();
+
+			await Task.Run(() =>
+			{
+				pdf.GeneratePdf(stream);
+			});
+
 			stream.Position = 0;
 
 			var safeTitle = string.IsNullOrWhiteSpace(payload.Title)
 				? "SessionNotes"
 				: string.Concat(payload.Title.Split(Path.GetInvalidFileNameChars()));
 
-			return File(stream, "application/pdf", $"{safeTitle}-{formattedDate}.pdf");
-
+			return File(stream.ToArray(), "application/pdf", $"{safeTitle}-{formattedDate}.pdf");
 		}
 
 		private static void RenderCards(ColumnDescriptor col, List<PdfCardData> cards, int depth)
@@ -168,47 +171,39 @@ namespace DnDSessionNotes.Controllers
 					break;
 
 				case "Item_Card":
-					RenderItemCard(c, data);
+					AddField(c, "Item", data.IName);
+					AddField(c, "Category", data.ICategory);
+					AddField(c, "Rarity", data.IRarity);
+					AddParagraph(c, "Description", data.IDescription);
+					AddField(c, "Weight", data.IWeight);
+					AddField(c, "Quantity", data.IQuantity);
 					AddImageIfExists(c, data.ImageBase64);
 					break;
-			}
-		}
 
-		private static void RenderItemCard(ColumnDescriptor c, PdfCardContent data)
-		{
-			switch (data.SelectedType)
-			{
-				case "weapon":
-					AddField(c, "Weapon", data.WeaponData?.WName);
-					AddField(c, "Category", data.WeaponData?.WCategory);
-					AddField(c, "Rarity", data.WeaponData?.WRarity);
-					AddParagraph(c, "Description", data.WeaponData?.WDescription);
-					AddField(c, "Weight", data.WeaponData?.WWeight);
-					AddField(c, "Attack Roll", data.WeaponData?.WAttackRole);
-					AddField(c, "Damage Type", data.WeaponData?.WDamageType);
+				case "Weapon_Card":
+					AddField(c, "Weapon", data.WName);
+					AddField(c, "Category", data.WCategory);
+					AddField(c, "Rarity", data.WRarity);
+					AddParagraph(c, "Description", data.WDescription);
+					AddField(c, "Weight", data.WWeight);
+					AddField(c, "Attack Roll", data.WAttackRole);
+					AddField(c, "Damage Type", data.WDamageType);
+					AddImageIfExists(c, data.ImageBase64);
 					break;
 
-				case "spell":
-					AddField(c, "Spell", data.SpellData?.SName);
-					AddField(c, "Level", data.SpellData?.SLevel);
-					AddField(c, "School", data.SpellData?.SSchool);
-					AddField(c, "Casting Time", data.SpellData?.SCastingTime);
-					AddField(c, "Range", data.SpellData?.SRange);
-					AddField(c, "Target", data.SpellData?.STarget);
-					AddField(c, "Components", data.SpellData?.SComponents);
-					AddField(c, "Duration", data.SpellData?.SDuration);
-					AddField(c, "Classes", data.SpellData?.SClasses);
-					AddParagraph(c, "Description", data.SpellData?.SDescription);
-					AddParagraph(c, "Higher Levels", data.SpellData?.SHigherLevels);
-					break;
-
-				default:
-					AddField(c, "Item", data.ItemData?.IName);
-					AddField(c, "Category", data.ItemData?.ICategory);
-					AddField(c, "Rarity", data.ItemData?.IRarity);
-					AddParagraph(c, "Description", data.ItemData?.IDescription);
-					AddField(c, "Weight", data.ItemData?.IWeight);
-					AddField(c, "Quantity", data.ItemData?.IQuantity);
+				case "Spell_Card":
+					AddField(c, "Spell", data.SName);
+					AddField(c, "Level", data.SLevel);
+					AddField(c, "School", data.SSchool);
+					AddField(c, "Casting Time", data.SCastingTime);
+					AddField(c, "Range", data.SRange);
+					AddField(c, "Target", data.STarget);
+					AddField(c, "Components", data.SComponents);
+					AddField(c, "Duration", data.SDuration);
+					AddField(c, "Classes", data.SClasses);
+					AddParagraph(c, "Description", data.SDescription);
+					AddParagraph(c, "Higher Levels", data.SHigherLevels);
+					AddImageIfExists(c, data.ImageBase64);
 					break;
 			}
 		}
@@ -262,7 +257,5 @@ namespace DnDSessionNotes.Controllers
 				column.Item().Text("[Image failed to load]").FontColor(Colors.Red.Medium);
 			}
 		}
-
-
 	}
 }

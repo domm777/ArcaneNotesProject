@@ -65,8 +65,8 @@
                     <input type="hidden" id="noteType" value="gm" />
 
                     @* this is so the export as pdf can get the title and name *@
-                    <input type="hidden" id="noteTitle" value="@Model.currentWorkSpace.Title" />
-                    <input type="hidden" id="gmName" value="@User.Identity?.Name" />
+                    <input type="hidden" id="defaultNoteTitle" value="@Model.currentWorkSpace.Title" />
+                    <input type="hidden" id="defaultGmName" value="@User.Identity?.Name" />
 
                     <div class="workspace-form-grid">
                         <div class="workspace-field Title_Label_Input">

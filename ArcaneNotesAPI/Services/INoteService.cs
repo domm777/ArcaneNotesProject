@@ -13,5 +13,5 @@ public interface INoteService
     Task<Note> SyncNoteAsync(string userId, string workspaceId, JsonElement note);
     Task<List<WorkSpace>> GetWorkspacesAsync(string userId);
     Task<Note?> GetUserNoteInWorkspaceAsync(string userId, string workspaceId, string myUserId);
-    Task<WorkSpaceDTO> GetWorkSpaceAsync(string workSpace, string myUserId);
+    Task<WorkSpace> GetWorkSpaceAsync(string workSpace, string myUserId);
 }

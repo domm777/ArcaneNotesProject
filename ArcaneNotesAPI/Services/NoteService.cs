@@ -128,6 +128,15 @@ public class NoteService : INoteService
         return workspaces;
     }
 
+    public async Task<List<Note>> GetWorkspaceNotesAsync(string userId, string workspaceId)
+    {
+        // Simple security check before returning all notes in a room
+        var WorkSpace = await _workspaces.Find(w => w.Id == workspaceId).FirstOrDefaultAsync();
+        if (WorkSpace == null || (WorkSpace.OwnerId != userId && !WorkSpace.Collaborators.Contains(userId)))
+            return new List<Note>();
+        return await _notes.Find(n => n.WorkspaceId == workspaceId).ToListAsync();
+    }
+
     public async Task<Note?> GetUserNoteInWorkspaceAsync(string userId, string workspaceId, string myUserId)
     {
         var WorkSpace = await _workspaces.Find(w => w.Id == workspaceId).FirstOrDefaultAsync();
@@ -173,41 +182,11 @@ public class NoteService : INoteService
         }
     }
 
-    public async Task<WorkSpaceDTO> GetWorkSpaceAsync(string workSpaceId, string myUserId)
+    public async Task<WorkSpace> GetWorkSpaceAsync(string workSpace, string myUserId)
     {
-        var workSpace = await _workspaces.Find(w => w.Id == workSpaceId).FirstOrDefaultAsync();
-
-        if (workSpace == null || (workSpace.OwnerId != myUserId && !workSpace.Collaborators.Contains(myUserId)))
-        {
+        var WorkSpace = await _workspaces.Find(w => w.Id == workSpace).FirstOrDefaultAsync();
+        if (WorkSpace == null || (WorkSpace.OwnerId != myUserId && !WorkSpace.Collaborators.Contains(myUserId)))
             return null;
-        }
-        var idsToResolve = workSpace.Collaborators.ToList();
-        if (!idsToResolve.Contains(workSpace.OwnerId))
-        {
-            idsToResolve.Add(workSpace.OwnerId);
-        }
-        var allUserDocs = await _users.Find(Builders<User>.Filter.In(u => u.Id, idsToResolve))
-            .Project(u => new Collaberator 
-            { 
-                UserId = u.Id, 
-                UserName = u.Username 
-            })
-            .ToListAsync();
-        var ownerEntry = allUserDocs.FirstOrDefault(u => u.UserId == workSpace.OwnerId);
-        var finalCollabs = allUserDocs.Where(u => u.UserId != workSpace.OwnerId).ToList();
-    
-        if (ownerEntry != null)
-        {
-            finalCollabs.Insert(0, ownerEntry);
-        }
-        else
-        {
-            finalCollabs.Insert(0, new Collaberator 
-            { 
-                UserId = workSpace.OwnerId, 
-                UserName = $"{workSpace.GMName} (Account Deleted)" 
-            });
-        }
-        return new WorkSpaceDTO(finalCollabs, workSpace);
+        return WorkSpace;
     }
 }

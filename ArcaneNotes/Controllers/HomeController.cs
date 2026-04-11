@@ -69,9 +69,9 @@ namespace ArcaneNotes.Controllers
                 return StatusCode((int)response.StatusCode);
             }
 
-            var gotWorkSpace = await response.Content.ReadFromJsonAsync<WorkSpaceDTO>();
+            var gotWorkSpace = await response.Content.ReadFromJsonAsync<WorkSpace>();
             //always start with the owners note first, we can change this in the future if we want
-            GMFormViewModel model = new(gotWorkSpace, gotWorkSpace.Collaborators[0]);
+            GMFormViewModel model = new(gotWorkSpace, gotWorkSpace.OwnerId);
             return View("GMForm", model);
         }
 

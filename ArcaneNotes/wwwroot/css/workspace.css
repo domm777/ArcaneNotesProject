@@ -461,7 +461,7 @@ body {
     .workspace-main-shell {
 /*        display: inline-block;*/
         width: min(100%, 1400px);
-        margin: 220px auto;
+        margin: 200px auto;
     }
 }
 

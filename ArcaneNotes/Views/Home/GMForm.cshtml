@@ -6,43 +6,7 @@
 <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
-@* @section Left_Side_Bar {
-    <div>
-        <h4>@Model.currentWorkSpace.Title</h4>
-        <h4>@Model.currentWorkSpace.GMName</h4>
-        <div class="UsersWorkSpace">
-            @{
-                <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
-                    @Model.selectedNoteId
-                </button>
-    
-                if (Model.currentWorkSpace.Collaborators.Any())
-                {
-                    @foreach(var colab in Model.currentWorkSpace.Collaborators){
-                        <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
-                            @colab
-                        </button>
-                    }
-                }
-                else
-                {
-                    <p>No Collaborators Yet</p>
-                }
-    
-                <div class="form-group">
-                    <label class="form-label">New Collaborator</label>
-                    <input type="text" id="collaboratorEmailInput" class="form-input" placeholder="Enter User's Email" />
-                </div>
 
-                <div class="form-actions">
-                    <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
-                        Add User
-                    </button>
-                </div>
-            }
-        </div>
-    </div>
-} *@
 @section GM_Session_Notes {
     <div class="workspace-page" spellcheck="false">
         <div class="workspace-main-shell">
@@ -103,7 +67,7 @@
                     <input type="hidden" id="noteTitle" value="@Model.currentWorkSpace.Title" />
                     <input type="hidden" id="gmName" value="@User.Identity?.Name" />
 
-                    <!--<div class="workspace-form-grid">
+                    <div class="workspace-form-grid">
                         <div class="workspace-field Title_Label_Input">
                             <label class="workspace-label form-label fw-bold" for="noteTitle">Title</label>
                             <input type="text"
@@ -124,7 +88,6 @@
                                    autocomplete="off" />
                         </div>
                     </div>
-                    -->
 
                     <div id="user-profile" class="workspace-user-profile" style="display:none;">
                         <div class="workspace-user-profile-inner">

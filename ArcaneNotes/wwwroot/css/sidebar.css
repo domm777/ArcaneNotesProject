@@ -11,41 +11,41 @@
 
 @media (min-width: 0px) and (max-width: 1439px) {
     .LeftSideBar {
-        /*        display: none;*/
+        /* display: none;*/
         position: absolute;
         width: auto;
         position: fixed;
         top: 20px;
-/*        bottom: 0px;*/
+        /* bottom: 0px;*/
         left: 20px;
         right: 20px;
         border-radius: 28px;
         padding: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
     }
 }
 
 @media (min-width: 1440px) and (max-width: 2189px) {
     .LeftSideBar {
-        /*        display: none;*/
+        /* display: none;*/
         position: absolute;
         width: auto;
         position: fixed;
         top: 20px;
-/*        bottom: 0px;*/
+        /* bottom: 0px;*/
         left: 20px;
         right: 20px;
         border-radius: 28px;
         padding: 20px;
-        margin-bottom: 50px;
+        margin-bottom: 25px;
         background-color: darkolivegreen;
     }
 }
 
-/* light slate gray background 1854.44*/
+/* firebick background 1854.44*/
 @media (min-width: 2190px) and (max-width: 2224px) {
     .LeftSideBar {
-/*        display: inherit;*/
+        /* display: inherit;*/
         position: fixed;
         width: auto;
         top: 200px;
@@ -56,19 +56,21 @@
         background-color: firebrick;
     }
 }
+
 /* light slate gray background */
-@media (min-width: 2225.33px) and (max-width: 2529px) {
+@media (min-width: 2225px) and (max-width: 2529px) {
     .LeftSideBar {
         position: fixed;
         width: auto;
         top: 200px;
         bottom: 100px;
-        left: 130px;
+        left: 70px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightslategray;
     }
 }
+
 /* light pink background */
 @media (min-width: 2530px) and (max-width: 2629px) {
     .LeftSideBar {
@@ -76,7 +78,7 @@
         width: auto;
         top: 200px;
         bottom: 100px;
-        left: 200px;
+        left: 150px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightpink;
@@ -163,7 +165,7 @@
         position: fixed;
         top: 200px;
         bottom: 100px;
-        left: 500px;
+        left: 300px;
         border-radius: 28px;
         padding: 20px;
         background-color: lightsalmon;
@@ -176,7 +178,7 @@
         position: fixed;
         top: 200px;
         bottom: 100px;
-        left: 1300px;
+        left: 780px;
         border-radius: 28px;
         padding: 20px;
         background-color: navajowhite;

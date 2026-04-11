@@ -12,21 +12,21 @@ var key = builder.Configuration["Jwt:Key"];
 var keyBytes = Encoding.ASCII.GetBytes(key);
 
 builder.Services.AddAuthentication(options =>
-	{
-		options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-		options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-	})
-	.AddJwtBearer(options =>
-	{
-		options.TokenValidationParameters = new TokenValidationParameters
-		{
-			ValidateIssuerSigningKey = true,
-			IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
-			ValidateIssuer = false, // Set to true for production
-			ValidateAudience = false, // Set to true for production
-			ClockSkew = TimeSpan.Zero
-		};
-	});
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
+            ValidateIssuer = false, // Set to true for production
+            ValidateAudience = false, // Set to true for production
+            ClockSkew = TimeSpan.Zero
+        };
+    });
 // 1. Setup MongoDB Client (Singleton)
 var mongoConnectionString = builder.Configuration.GetConnectionString("MongoDb");
 builder.Services.AddSingleton<IMongoClient>(_ => new MongoClient(mongoConnectionString));
@@ -43,8 +43,8 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-	app.UseSwagger();
-	app.UseSwaggerUI();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

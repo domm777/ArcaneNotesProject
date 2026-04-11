@@ -1,186 +1,141 @@
-﻿.LeftSideBar {
-    margin-top:0px;
-    border-radius: 28px;
-    background: linear-gradient(180deg, rgba(20, 28, 48, 0.96), rgba(11, 16, 30, 0.96));
-    border: 1px solid rgba(201, 162, 39, 0.45);
-    box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.10), 0 18px 50px rgba(0, 0, 0, 0.45), inset 0 0 35px rgba(255, 255, 255, 0.03);
-    box-sizing: border-box;
+﻿/*-----------------------------------------
+LAYOUT (FULL HEIGHT SIDEBAR)
+-----------------------------------------*/
+
+.workspace-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0; /* IMPORTANT: removes floating look */
+    width: 100%;
+}
+
+/* FULL HEIGHT SIDEBAR */
+.left-sidebar {
+    min-height: 100vh;
+    height: 100%;
     position: sticky;
-    left: 300px;
+    top: 0;
+    padding: 28px 18px;
+    background: linear-gradient( 180deg, rgba(15, 20, 36, 0.98), rgba(10, 15, 28, 1) );
+    border-right: 1px solid rgba(201, 162, 39, 0.25);
+    border-radius: 0;
+    box-shadow: none;
 }
 
-@media (min-width: 0px) and (max-width: 1439px) {
-    .LeftSideBar {
-        /* display: none;*/
-        position: absolute;
-        width: auto;
-        position: fixed;
-        top: 20px;
-        /* bottom: 0px;*/
-        left: 20px;
-        right: 20px;
-        border-radius: 28px;
-        padding: 20px;
-        margin-bottom: 25px;
-    }
+/*-----------------------------------------
+REMOVE TOP + LEFT SPACE
+-----------------------------------------*/
+
+/* kill browser default margin */
+body {
+    margin: 0;
 }
 
-@media (min-width: 1440px) and (max-width: 2189px) {
-    .LeftSideBar {
-        /* display: none;*/
-        position: absolute;
-        width: auto;
-        position: fixed;
-        top: 20px;
-        /* bottom: 0px;*/
-        left: 20px;
-        right: 20px;
-        border-radius: 28px;
-        padding: 20px;
-        margin-bottom: 25px;
-        background-color: darkolivegreen;
-    }
+.workspace-page {
+    padding: 0 !important;
 }
 
-/* firebick background 1854.44*/
-@media (min-width: 2190px) and (max-width: 2224px) {
-    .LeftSideBar {
-        /* display: inherit;*/
-        position: fixed;
-        width: auto;
-        top: 200px;
-        bottom: 100px;
-        left: 20px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: firebrick;
-    }
+.workspace-main-shell {
+    margin: 0 !important;
+    width: 100% !important;
 }
 
-/* light slate gray background */
-@media (min-width: 2225px) and (max-width: 2529px) {
-    .LeftSideBar {
-        position: fixed;
-        width: auto;
-        top: 200px;
-        bottom: 100px;
-        left: 70px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightslategray;
-    }
+.workspace-layout {
+    margin: 0;
+    padding: 0;
 }
 
-/* light pink background */
-@media (min-width: 2530px) and (max-width: 2629px) {
-    .LeftSideBar {
-        position: fixed;
-        width: auto;
-        top: 200px;
-        bottom: 100px;
-        left: 150px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightpink;
-    }
+.left-sidebar {
+    margin: 0;
 }
 
-/* light pink background */
-/*@media (min-width: 2630px) and (max-width: 2729px) {
-    .LeftSideBar {
-        position: fixed;
-        width: auto;
-        top: 200px;
-        bottom: 100px;
-        left: 200px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightyellow;
-    }
-}*/
+/*-----------------------------------------
+CONTENT STYLING
+-----------------------------------------*/
 
-/* light green background */
-/*@media (min-width: 2730px) and (max-width: 2929px) {
-    .LeftSideBar {
-        width: auto;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 250px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightseagreen;
-    }
-}*/
-
-/* light steel background */
-/*@media (min-width: 2930px) and (max-width: 3029px) {
-    .LeftSideBar {
-        margin: auto;
-        width: auto;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 350px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightsteelblue;
-    }
-}*/
-
-/* dark blue background */
-/*@media (min-width: 3030px) and (max-width: 3129px) {
-    .LeftSideBar {
-        margin: auto;
-        width: auto;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 400px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: darkblue;
-    }
-}*/
-
-/* dark slate gray (but looks greeny) background */
-/*@media (min-width: 3130px) and (max-width: 3276px) {
-    .LeftSideBar {
-        margin: auto;
-        width: auto;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 450px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: darkslategray;
-    }
-}*/
-
-/* light salmon background : */
-@media (min-width: 2630px) and (max-width: 3339px) {
-    .LeftSideBar {
-        width: auto;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 300px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightsalmon;
-    }
+.bottom-sidebar-meta {
+    margin-bottom: 18px;
+    line-height: 1.6;
+    color: rgba(231, 210, 162, 0.82);
 }
-/* light salmon background : */
-@media (min-width: 3340px) and (max-width: 5007px) {
-    .LeftSideBar {
-        width: auto;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 780px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: navajowhite;
+
+.bottom-sidebar-separator {
+    display: inline-block;
+    margin: 0 10px;
+    color: rgba(201, 162, 39, 0.55);
+}
+
+.workspace-sidebar-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* TILE */
+.workspace-sidebar-tile {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    background: linear-gradient( 180deg, rgba(28, 38, 61, 0.6), rgba(18, 26, 43, 0.6) );
+    color: #f5e7c2;
+    font-family: "Cinzel", serif;
+    font-size: 0.95rem;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+    .workspace-sidebar-tile:hover {
+        border-color: rgba(201, 162, 39, 0.5);
+        background: rgba(28, 38, 61, 0.9);
+    }
+
+/* EMPTY STATE */
+.bottom-sidebar-empty {
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px dashed rgba(201, 162, 39, 0.25);
+    color: rgba(231, 210, 162, 0.65);
+}
+
+/* FORM */
+.bottom-sidebar-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+    .bottom-sidebar-form .workspace-input {
+        width: 100%;
+    }
+
+.workspace-action-btn {
+    width: 100%;
+}
+
+/*-----------------------------------------
+MAIN CONTENT FIX
+-----------------------------------------*/
+
+.workspace-main-content {
+    padding: 0 24px;
+}
+
+/*-----------------------------------------
+RESPONSIVE
+-----------------------------------------*/
+
+@media (max-width: 900px) {
+    .workspace-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .left-sidebar {
+        position: relative;
+        min-height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.25);
     }
 }

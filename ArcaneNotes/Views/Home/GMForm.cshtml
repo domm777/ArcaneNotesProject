@@ -6,21 +6,72 @@
 <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
+@* @section Left_Side_Bar {
+    <div>
+        <h4>@Model.currentWorkSpace.Title</h4>
+        <h4>@Model.currentWorkSpace.GMName</h4>
+        <div class="UsersWorkSpace">
+            @{
+                <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
+                    @Model.selectedNoteId
+                </button>
+    
+                if (Model.currentWorkSpace.Collaborators.Any())
+                {
+                    @foreach(var colab in Model.currentWorkSpace.Collaborators){
+                        <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
+                            @colab
+                        </button>
+                    }
+                }
+                else
+                {
+                    <p>No Collaborators Yet</p>
+                }
+    
+                <div class="form-group">
+                    <label class="form-label">New Collaborator</label>
+                    <input type="text" id="collaboratorEmailInput" class="form-input" placeholder="Enter User's Email" />
+                </div>
 
+                <div class="form-actions">
+                    <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
+                        Add User
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+} *@
 @section GM_Session_Notes {
     <div class="workspace-page" spellcheck="false">
-        <div class="workspace-main-shell">
-            <div class="LeftSideBar">
-                <div class="workspace-info-data-field">
-                    <h4>Title: @Model.currentWorkSpace.Title GameMaster: @Model.currentWorkSpace.GMName</h4>
+
+        <!--NEW LAYOUT WRAPPER -->
+        <div class="workspace-layout">
+
+            <!-- LEFT SIDEBAR -->
+            <div class="workspace-sidebar-shell left-sidebar">
+
+                <div class="workspace-sidebar-header">
+                    <p class="workspace-sidebar-eyebrow">Workspace</p>
+                    <h2 class="workspace-sidebar-title">Collaborators & Notes</h2>
                 </div>
-                <div class="UsersWorkSpace">
-                    @{
-                        <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.currentWorkSpace.Collaborators[0].UserId')">
-                            @Model.currentWorkSpace.Collaborators[0].UserName
-                        </button>
-    
-                        if (Model.currentWorkSpace.Collaborators.Count > 1)
+
+                <div class="workspace-section-subtitle bottom-sidebar-meta">
+                    <strong>Title:</strong> @Model.currentWorkSpace.Title
+                    <span class="bottom-sidebar-separator">•</span>
+                    <strong>GameMaster:</strong> @Model.currentWorkSpace.GMName
+                </div>
+
+                <div class="workspace-sidebar-list">
+                    <button class="workspace-sidebar-tile"
+                            onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.currentWorkSpace.Collaborators[0].UserId')">
+                        @Model.currentWorkSpace.Collaborators[0].UserName
+                    </button>
+
+                    @if (Model.currentWorkSpace.Collaborators.Count > 1)
+                    {
+                        @foreach (var colab in Model.currentWorkSpace.Collaborators)
                         {
                             @for (int i = 1; i < Model.currentWorkSpace.Collaborators.Count; i++) {
                                 var colab = Model.currentWorkSpace.Collaborators[i];
@@ -43,24 +94,53 @@
                             <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
                                 Add User
                             </button>
+                            <button class="workspace-sidebar-tile"
+                                    onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
+                                @colab
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        <div class="bottom-sidebar-empty">
+                            No Collaborators Yet
                         </div>
                     }
                 </div>
+
+                <div class="bottom-sidebar-form">
+                    <label class="workspace-label">New Collaborator</label>
+                    <input type="text"
+                           id="collaboratorEmailInput"
+                           class="workspace-input"
+                           placeholder="Enter User's Email" />
+
+                    <button class="workspace-action-btn"
+                            onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
+                        Add User
+                    </button>
+                </div>
+
             </div>
-            <div class="workspace-card">
-                <div class="workspace-card-inner">
 
-                    <div class="workspace-title-block">
-                        <div id="DivTitleImageScroll" class="workspace-scroll-wrap">
-                        </div>
+            <!-- MAIN CONTENT -->
+            <div class="workspace-main-content">
 
-                        <div class="workspace-heading-group">
-                            <h1 class="AppTitle workspace-main-title">Spellbook Notes</h1>
-                            <p class="workspace-subtitle">
-                                Build, organize, and export your spellbook notes.
-                            </p>
-                        </div>
-                    </div>
+                <div class="workspace-main-shell">
+
+                    <div class="workspace-card">
+                        <div class="workspace-card-inner">
+
+                            <div class="workspace-title-block">
+                                <div id="DivTitleImageScroll" class="workspace-scroll-wrap"></div>
+
+                                <div class="workspace-heading-group">
+                                    <h1 class="AppTitle workspace-main-title">Workspace Notes</h1>
+                                    <p class="workspace-subtitle">
+                                        Build, organize, and export your Workspace notes.
+                                    </p>
+                                </div>
+                            </div>
 
                     <input type="hidden" id="noteType" value="gm" />
 
@@ -90,98 +170,49 @@
                         </div>
                     </div>
 
-                    <div id="user-profile" class="workspace-user-profile" style="display:none;">
-                        <div class="workspace-user-profile-inner">
-                            <img id="user-pic"
-                                 class="workspace-user-pic"
-                                 alt="Profile"
-                                 style="display:none;" />
+                            <div id="user-profile" class="workspace-user-profile" style="display:none;">
+                                <div class="workspace-user-profile-inner">
+                                    <img id="user-pic" class="workspace-user-pic" alt="Profile" style="display:none;" />
 
-                            <div class="workspace-user-meta">
-                                <div id="user-name" class="workspace-user-name fw-bold"></div>
-                                <div id="user-email" class="workspace-user-email"></div>
+                                    <div class="workspace-user-meta">
+                                        <div id="user-name" class="workspace-user-name fw-bold"></div>
+                                        <div id="user-email" class="workspace-user-email"></div>
+                                    </div>
+                                </div>
+
+                                <button id="google-logout-btn" type="button" class="btn btn-gm btn-sm workspace-secondary-action">
+                                    Logout
+                                </button>
                             </div>
-                        </div>
 
-                        <button id="google-logout-btn" type="button" class="btn btn-gm btn-sm workspace-secondary-action">
-                            Logout
-                        </button>
-                    </div>
+                            <div class="workspace-section">
+                                <div class="workspace-section-header">
+                                    <h2 class="workspace-section-title">Add Workspace Elements</h2>
+                                    <p class="workspace-section-subtitle">
+                                        Choose a category below to add structured content to this Workspace.
+                                    </p>
+                                </div>
 
-                    <div class="workspace-section">
-                        <div class="workspace-section-header">
-                            <h2 class="workspace-section-title">Add Spellbook Elements</h2>
-                            <p class="workspace-section-subtitle">
-                                Choose a category below to add structured content to this spellbook.
-                            </p>
-                        </div>
+                                <div class="workspace-action-grid">
+                                    <!-- KEEP YOUR BUTTONS -->
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'NPC_Card')">+ NPC</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'ExtraInfo_Card')">+ Extra</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Group_Card')">+ Category</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Item_Card')">+ Item</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Weapon_Card')">+ Weapon</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Spell_Card')">+ Spell</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Location_Card')">+ Location</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Plot_Card')">+ Plot</button>
+                                    <button class="workpace-spellbook-element-btn" type="button" onclick="ExportedFunctions.AddCard(formContainer,'Treasure_Card')">+ Treasure</button>
+                                </div>
+                            </div>
 
-                        <div class="workspace-action-grid">
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'NPC_Card')">
-                                + NPC
-                            </button>
+                            <div id="formContainer" class="workspace-dynamic-content"></div>
 
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'ExtraInfo_Card')">
-                                + Extra
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Group_Card')">
-                                + Category
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Item_Card')">
-                                + Item
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Weapon_Card')">
-                                + Weapon
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Spell_Card')">
-                                + Spell
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Location_Card')">
-                                + Location
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Plot_Card')">
-                                + Plot
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Treasure_Card')">
-                                + Treasure
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="formContainer" class="workspace-dynamic-content"></div>
-
-                    <div class="workspace-section workspace-tools-section">
-                        <div class="workspace-section-header">
-                            <h2 class="workspace-section-title">Spellbook Tools</h2>
-                            <p class="workspace-section-subtitle">
-                                Save, import, clear, enhance, or export your spellbook.
-                            </p>
-                        </div>
+                            <div class="workspace-section workspace-tools-section">
+                                <div class="workspace-section-header">
+                                    <h2 class="workspace-section-title">Workspace Tools</h2>
+                                </div>
 
                         <div class="workspace-tools-grid">
                             <button class="workpace-spellbook-tools-btn"
@@ -228,14 +259,17 @@
                     </div>
 
                 </div>
+
             </div>
 
-            <div id="arcanePopup" class="arcane-popup">
-                <div class="popup-content">
-                    <p id="popupMessage">Add at least one note before making it arcane!</p>
-                    <button id="popupClose" class="btn btn-gm mt-3" type="button">OK</button>
-                </div>
+        </div>
+
+        <div id="arcanePopup" class="arcane-popup">
+            <div class="popup-content">
+                <p id="popupMessage">Add at least one note before making it arcane!</p>
+                <button id="popupClose" class="btn btn-gm mt-3" type="button">OK</button>
             </div>
+        </div>
 
         </div>
     </div>

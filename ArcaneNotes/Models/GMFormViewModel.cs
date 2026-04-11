@@ -4,15 +4,15 @@ namespace ArcaneNotes.Models;
 
 public class GMFormViewModel
 {
-    public WorkSpace? currentWorkSpace;
-    public string selectedNoteId;
+    public WorkSpaceDTO? currentWorkSpace;
+    public Collaberator selectedNote;
     public GMFormViewModel()
     {
     }
 
-    public GMFormViewModel(WorkSpace space, string startingId)
+    public GMFormViewModel(WorkSpaceDTO space, Collaberator startinguser)
     {
-        selectedNoteId = startingId;
+        selectedNote = startinguser;
         currentWorkSpace = space;
     }
 }

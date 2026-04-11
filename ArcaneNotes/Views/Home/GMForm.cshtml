@@ -52,15 +52,16 @@
                 </div>
                 <div class="UsersWorkSpace">
                     @{
-                        <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
-                            @Model.selectedNoteId
+                        <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.currentWorkSpace.Collaborators[0].UserId')">
+                            @Model.currentWorkSpace.Collaborators[0].UserName
                         </button>
     
-                        if (Model.currentWorkSpace.Collaborators.Any())
+                        if (Model.currentWorkSpace.Collaborators.Count > 1)
                         {
-                            @foreach(var colab in Model.currentWorkSpace.Collaborators){
-                                <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
-                                    @colab
+                            @for (int i = 1; i < Model.currentWorkSpace.Collaborators.Count; i++) {
+                                var colab = Model.currentWorkSpace.Collaborators[i];
+                                <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab.UserId')">
+                                    @colab.UserName
                                 </button>
                             }
                         }
@@ -257,7 +258,7 @@
                             
                             <button class="workpace-spellbook-tools-btn"
                                     type="button"
-                                    onclick="ExportedFunctions.SaveData('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
+                                    onclick="ExportedFunctions.SaveData('@Model.currentWorkSpace.Id', '@Model.selectedNote.UserId')">
                                 Save Data
                             </button>
                         </div>
@@ -279,7 +280,7 @@
 @section Scripts {
     <script type="module">
         const wpId = "@Model.currentWorkSpace.Id";
-        const noteId = "@Model.selectedNoteId";
+        const noteId = "@Model.selectedNote.UserId";
         
         console.log("Arcane Notes: Module queue reached. Executing LoadNoteFromDB...");
         

@@ -1,6 +1,30 @@
+/*-----------------------------------------VARIABLES / CUSTOM LAYOUT-------------------------------------------------*/
+/* Add custom layout variables here. Change these globally by overriding on `:root` or per-page by setting them on `.workspace-page` */
+:root {
+    --workspace-max-width: 1400px;       /* main content max width */
+    --workspace-card-max-width: 1500px;  /* card width (keeps original intent) */
+    --workspace-padding-vertical: 32px;  /* page vertical padding */
+    --workspace-padding-horizontal: 24px;/* page horizontal padding */
+    --workspace-direction: row;          /* layout flow: row | column */
+}
 
+/* convenience example classes (use on .workspace-page to switch presets)
+.workspace-page.layout-compact {
+    --workspace-max-width: 1000px;
+    --workspace-card-max-width: 1100px;
+    --workspace-padding-vertical: 20px;
+    --workspace-padding-horizontal: 16px;
+    --workspace-direction: column;
+}
 
-
+.workspace-page.layout-wide {
+    --workspace-max-width: 2000px;
+    --workspace-card-max-width: 1800px;
+    --workspace-padding-vertical: 40px;
+    --workspace-padding-horizontal: 32px;
+    --workspace-direction: row;
+}
+*/
 
 /*-----------------------------------------WORKSPACE PAGE-------------------------------------------------*/
 
@@ -18,14 +42,25 @@ body {
 .workspace-page {
     min-height: 100vh;
     width: 100%;
-    padding: 32px 24px;
+    padding: var(--workspace-padding-vertical) var(--workspace-padding-horizontal);
     box-sizing: border-box;
 }
 
+/*-----------------------------------------MAIN LAYOUT-------------------------------------------------*/
+
 .workspace-main-shell {
     display: flex;
-    width: min(100%, 1400px);
+    width: min(100%, var(--workspace-max-width));
     margin: 0 auto;
+}
+
+.workspace-left-layout-container {
+    display: flex;
+    flex-direction: var(--workspace-direction);
+    gap: 24px;
+    width: fit-content; /* if you remove this it will break DON'T TOUCH */
+    margin: auto;
+    align-items: start;
 }
 
 .workspace-topbar {
@@ -118,7 +153,8 @@ body {
 /*-----------------------------------------MAIN CARD-------------------------------------------------*/
 
 .workspace-card {
-    width: 100%;
+    width: 1500px;
+    margin: 20px auto;
     padding: 40px 42px;
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(20, 28, 48, 0.96), rgba(11, 16, 30, 0.96));

@@ -30,25 +30,25 @@
     </div>
     -->
 
-    <div class="container workspace-layout-container">
-        <main role="main" class="pb-3 workspace-layout-body">
+    <div class="container workspace-left-layout-container">
+        <main role="main" class="pb-3 workspace-left-layout-body">
             @RenderBody()
         </main>
+
+        <div class="workspace-left-layout" id="workspace-left-layout-toggle">
+            @RenderSection("Workspace_Left_Sidebar", required: false)
+        </div>
         
-        <div class="Main_GM_Session_Create workspace-layout-gm-section">
+        <div class="Main_GM_Session_Create workspace-left-layout-gm-section">
             @RenderSection("GM_Session_Notes", required: false)
         </div>
         
-        @* <div class="LeftSideBar workspace-layout-sidebar-below"> *@
-        @* <div class="LeftSideBar">
-            @RenderSection("Left_Side_Bar", required: false)
-        </div> *@
-
-        <div class="RightSideBar workspace-layout-sidebar-right">
+        <div class="RightSideBar workspace-left-layout-sidebar-right">
             @RenderSection("Right_Side_Bar", required: false)
         </div>
-        <div class="hamburger-menu">
-            @RenderSection("Scripts_SideBar_toggle", required: false)
+        
+        <div class="">
+            @RenderSection("Toggle_Script", required: false)
         </div>
     </div>
 

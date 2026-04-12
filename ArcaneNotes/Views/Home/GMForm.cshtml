@@ -6,283 +6,260 @@
 <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/sidebar-toggle.css" asp-append-version="true" />
 
-@section GM_Session_Notes {
-    <div class="workspace-page" spellcheck="false">
+@section Workspace_Left_Sidebar {
+    <div class="workspace-sidebar-header">
+        <p class="workspace-sidebar-eyebrow">Workspace</p>
+        <h2 class="workspace-sidebar-title">Collaborators & Notes</h2>
+    </div>
 
-        <!--NEW LAYOUT WRAPPER -->
-        <div class="workspace-layout">
+    <div class="workspace-section-subtitle bottom-sidebar-meta">
+        <strong>Title:</strong> @Model.currentWorkSpace.Title
+        <span class="bottom-sidebar-separator">•</span>
+        <strong>GameMaster:</strong> @Model.currentWorkSpace.GMName
+    </div>
 
-            <!-- LEFT SIDEBAR -->
-            <div class="workspace-sidebar-shell left-sidebar">
+    <div class="workspace-sidebar-list">
+        <button class="workspace-sidebar-tile"
+                onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
+            @Model.selectedNoteId
+        </button>
 
-                <div class="workspace-sidebar-header">
-                    <p class="workspace-sidebar-eyebrow">Workspace</p>
-                    <h2 class="workspace-sidebar-title">Collaborators & Notes</h2>
-                </div>
-
-                <div class="workspace-section-subtitle bottom-sidebar-meta">
-                    <strong>Title:</strong> @Model.currentWorkSpace.Title
-                    <span class="bottom-sidebar-separator">•</span>
-                    <strong>GameMaster:</strong> @Model.currentWorkSpace.GMName
-                </div>
-
-                <div class="workspace-sidebar-list">
-                    <button class="workspace-sidebar-tile"
-                            onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
-                        @Model.selectedNoteId
-                    </button>
-
-                    @if (Model.currentWorkSpace.Collaborators.Any())
-                    {
-                        @foreach (var colab in Model.currentWorkSpace.Collaborators)
-                        {
-                            <button class="workspace-sidebar-tile"
-                                    onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
-                                @colab
-                            </button>
-                        }
-                    }
-                    else
-                    {
-                        <div class="bottom-sidebar-empty">
-                            No Collaborators Yet
-                        </div>
-                    }
-                </div>
-
-                <div class="bottom-sidebar-form">
-                    <label class="workspace-label">New Collaborator</label>
-                    <input type="text"
-                           id="collaboratorEmailInput"
-                           class="workspace-input"
-                           placeholder="Enter User's Email" />
-
-                    <button class="workspace-action-btn"
-                            onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
-                        Add User
-                    </button>
-                </div>
-
-                        <div class="form-actions">
-                            <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
-                                Add User
-                            </button>
-                        </div>
-                    }
-                </div>
-            </div>
-            <div class="workspace-card">
-                <button id="sidebarToggle" class="floating-toggle" aria-label="Toggle sidebar">
-                    <span class="toggle-icon">≡</span>
+        @if (Model.currentWorkSpace.Collaborators.Any()) {
+            @foreach (var colab in Model.currentWorkSpace.Collaborators) {
+                <button class="workspace-sidebar-tile"
+                        onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
+                    @colab
                 </button>
-                <div class="workspace-card-inner">
+            }
+        } else {
+            <div class="bottom-sidebar-empty">
+                No Collaborators Yet
+            </div>
+        }
+    </div>
 
-                    <div class="workspace-title-block">
-                        <div id="DivTitleImageScroll" class="workspace-scroll-wrap">
-                        </div>
+    <div class="bottom-sidebar-form">
+        <label class="workspace-label">New Collaborator</label>
+        <input type="text"
+                id="collaboratorEmailInput"
+                class="workspace-input"
+                placeholder="Enter User's Email" />
+        <div class="form-actions">
+            <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
+                Add User
+            </button>
+        </div>
+    </div>
 
-                        <div class="workspace-heading-group">
-                            <h1 class="AppTitle workspace-main-title">Spellbook Notes</h1>
-                            <p class="workspace-subtitle">
-                                Build, organize, and export your spellbook notes.
-                            </p>
-                        </div>
-                    </div>
+}
+@section GM_Session_Notes {
+<div class="workspace-card">
+    <button id="sidebarToggle" class="floating-toggle" aria-label="Toggle sidebar">
+        <span class="toggle-icon">≡</span>
+    </button>
+    <div class="workspace-card-inner">
 
-                    <input type="hidden" id="noteType" value="gm" />
+        <div class="workspace-title-block">
+            <div id="DivTitleImageScroll" class="workspace-scroll-wrap">
+            </div>
 
-                    @* this is so the export as pdf can get the title and name *@
-                    @* <div class="workspace-title-block">
-                                <div id="DivTitleImageScroll" class="workspace-scroll-wrap"></div>
+            <div class="workspace-heading-group">
+                <h1 class="AppTitle workspace-main-title">Spellbook Notes</h1>
+                <p class="workspace-subtitle">
+                    Build, organize, and export your spellbook notes.
+                </p>
+            </div>
+        </div>
 
-                                <div class="workspace-heading-group">
-                                    <h1 class="AppTitle workspace-main-title">Workspace Notes</h1>
-                                    <p class="workspace-subtitle">
-                                        Build, organize, and export your Workspace notes.
-                                    </p> *@
-                    <input type="hidden" id="defaultNoteTitle" value="@Model.currentWorkSpace.Title" />
-                    <input type="hidden" id="defaultGmName" value="@User.Identity?.Name" />
+        <input type="hidden" id="noteType" value="gm" />
 
-                    <div class="workspace-form-grid">
-                        <div class="workspace-field Title_Label_Input">
-                            <label class="workspace-label form-label fw-bold" for="noteTitle">Title</label>
-                            <input type="text"
-                                   id="noteTitle"
-                                   class="workspace-input form-control"
-                                   placeholder="Enter a spellbook title (e.g., The Crimson Voyage)"
-                                   spellcheck="false"
-                                   autocomplete="off" />
-                        </div>
+        @* this is so the export as pdf can get the title and name *@
+        <div class="workspace-title-block">
+            <div id="DivTitleImageScroll" class="workspace-scroll-wrap"></div>
 
-                        <div class="workspace-field Name_Label_Input">
-                            <label class="workspace-label form-label fw-bold" for="gmName">GM Name</label>
-                            <input type="text"
-                                   id="gmName"
-                                   class="workspace-input form-control"
-                                   placeholder="Enter your name"
-                                   spellcheck="false"
-                                   autocomplete="off" />
-                        </div>
-                    </div>
+            <input type="hidden" id="defaultNoteTitle" value="@Model.currentWorkSpace.Title" />
+            <input type="hidden" id="defaultGmName" value="@User.Identity?.Name" />
 
-                    <div id="user-profile" class="workspace-user-profile" style="display:none;">
-                        <div class="workspace-user-profile-inner">
-                            <img id="user-pic"
-                                 class="workspace-user-pic"
-                                 alt="Profile"
-                                 style="display:none;" />
+            <div class="workspace-form-grid">
+                <div class="workspace-field Title_Label_Input">
+                    <label class="workspace-label form-label fw-bold" for="noteTitle">Title</label>
+                    <input type="text"
+                           id="noteTitle"
+                           class="workspace-input form-control"
+                           placeholder="Enter a spellbook title (e.g., The Crimson Voyage)"
+                           spellcheck="false"
+                           autocomplete="off" />
+                </div>
 
-                            <div class="workspace-user-meta">
-                                <div id="user-name" class="workspace-user-name fw-bold"></div>
-                                <div id="user-email" class="workspace-user-email"></div>
-                            </div>
-                        </div>
-
-                        <button id="google-logout-btn" type="button" class="btn btn-gm btn-sm workspace-secondary-action">
-                            Logout
-                        </button>
-                    </div>
-
-                    <div class="workspace-section">
-                        <div class="workspace-section-header">
-                            <h2 class="workspace-section-title">Add Spellbook Elements</h2>
-                            <p class="workspace-section-subtitle">
-                                Choose a category below to add structured content to this spellbook.
-                            </p>
-                        </div>
-
-                        <div class="workspace-action-grid">
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'NPC_Card')">
-                                + NPC
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'ExtraInfo_Card')">
-                                + Extra
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Group_Card')">
-                                + Category
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Item_Card')">
-                                + Item
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Weapon_Card')">
-                                + Weapon
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Spell_Card')">
-                                + Spell
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Location_Card')">
-                                + Location
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Plot_Card')">
-                                + Plot
-                            </button>
-
-                            <button class="workpace-spellbook-element-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Treasure_Card')">
-                                + Treasure
-                            </button>
-                        </div>
-                    </div>
-
-                    <div id="formContainer" class="workspace-dynamic-content"></div>
-
-                    <div class="workspace-section workspace-tools-section">
-                        <div class="workspace-section-header">
-                            <h2 class="workspace-section-title">Spellbook Tools</h2>
-                            <p class="workspace-section-subtitle">
-                                Save, import, clear, enhance, or export your spellbook.
-                            </p>
-                        </div>
-
-                        <div class="workspace-tools-grid">
-                            <button class="workpace-spellbook-tools-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.ExportPDF()">
-                                Export As PDF
-                            </button>
-
-                            <button class="workpace-spellbook-tools-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.ExportCards()">
-                                Export As Json
-                            </button>
-
-                            <button class="workpace-spellbook-tools-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.ImportCards()">
-                                Import From Json
-                            </button>
-
-                            <a asp-action="Index"
-                               class="workpace-spellbook-tools-btn">
-                                ← Back to Books
-                            </a>
-
-                            <button class="workpace-spellbook-tools-btn"
-                                    type="button"
-                                    onclick="window.location.reload();">
-                                + Create New Book
-                            </button>
-
-                            <button class="workpace-spellbook-tools-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.ClearThePage()">
-                                Clear Page
-                            </button>
-                            
-                            <button class="workpace-spellbook-tools-btn"
-                                    type="button"
-                                    onclick="ExportedFunctions.SaveData('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
-                                Save Data
-                            </button>
-                        </div>
-                    </div>
-
+                <div class="workspace-field Name_Label_Input">
+                    <label class="workspace-label form-label fw-bold" for="gmName">GM Name</label>
+                    <input type="text"
+                           id="gmName"
+                           class="workspace-input form-control"
+                           placeholder="Enter your name"
+                           spellcheck="false"
+                           autocomplete="off" />
                 </div>
             </div>
 
-            <div id="arcanePopup" class="arcane-popup">
-                <div class="popup-content">
-                    <p id="popupMessage">Add at least one note before making it arcane!</p>
-                    <button id="popupClose" class="btn btn-gm mt-3" type="button">OK</button>
+            <div id="user-profile" class="workspace-user-profile" style="display:none;">
+                <div class="workspace-user-profile-inner">
+                    <img id="user-pic"
+                         class="workspace-user-pic"
+                         alt="Profile"
+                         style="display:none;" />
+
+                    <div class="workspace-user-meta">
+                        <div id="user-name" class="workspace-user-name fw-bold"></div>
+                        <div id="user-email" class="workspace-user-email"></div>
+                    </div>
+                </div>
+
+                <button id="google-logout-btn" type="button" class="btn btn-gm btn-sm workspace-secondary-action">
+                    Logout
+                </button>
+            </div>
+
+            <div class="workspace-section">
+                <div class="workspace-section-header">
+                    <h2 class="workspace-section-title">Add Spellbook Elements</h2>
+                    <p class="workspace-section-subtitle">
+                        Choose a category below to add structured content to this spellbook.
+                    </p>
+                </div>
+
+                <div class="workspace-action-grid">
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'NPC_Card')">
+                        + NPC
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'ExtraInfo_Card')">
+                        + Extra
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Group_Card')">
+                        + Category
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Item_Card')">
+                        + Item
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Weapon_Card')">
+                        + Weapon
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Spell_Card')">
+                        + Spell
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Location_Card')">
+                        + Location
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Plot_Card')">
+                        + Plot
+                    </button>
+
+                    <button class="workpace-spellbook-element-btn"
+                            type="button"
+                            onclick="ExportedFunctions.AddCard(document.getElementById('formContainer'), 'Treasure_Card')">
+                        + Treasure
+                    </button>
+                </div>
+            </div>
+
+            <div id="formContainer" class="workspace-dynamic-content"></div>
+
+            <div class="workspace-section workspace-tools-section">
+                <div class="workspace-section-header">
+                    <h2 class="workspace-section-title">Spellbook Tools</h2>
+                    <p class="workspace-section-subtitle">
+                        Save, import, clear, enhance, or export your spellbook.
+                    </p>
+                </div>
+
+                <div class="workspace-tools-grid">
+                    <button class="workpace-spellbook-tools-btn"
+                            type="button"
+                            onclick="ExportedFunctions.ExportPDF()">
+                        Export As PDF
+                    </button>
+
+                    <button class="workpace-spellbook-tools-btn"
+                            type="button"
+                            onclick="ExportedFunctions.ExportCards()">
+                        Export As Json
+                    </button>
+
+                    <button class="workpace-spellbook-tools-btn"
+                            type="button"
+                            onclick="ExportedFunctions.ImportCards()">
+                        Import From Json
+                    </button>
+
+                    <a asp-action="Index"
+                       class="workpace-spellbook-tools-btn">
+                        ← Back to Books
+                    </a>
+
+                    <button class="workpace-spellbook-tools-btn"
+                            type="button"
+                            onclick="window.location.reload();">
+                        + Create New Book
+                    </button>
+
+                    <button class="workpace-spellbook-tools-btn"
+                            type="button"
+                            onclick="ExportedFunctions.ClearThePage()">
+                        Clear Page
+                    </button>
+
+                    <button class="workpace-spellbook-tools-btn"
+                            type="button"
+                            onclick="ExportedFunctions.SaveData('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
+                        Save Data
+                    </button>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <div id="arcanePopup" class="arcane-popup">
+        <div class="popup-content">
+            <p id="popupMessage">Add at least one note before making it arcane!</p>
+            <button id="popupClose" class="btn btn-gm mt-3" type="button">OK</button>
+        </div>
+    </div>
+</div>
 }
-@section Scripts {
+
+@section Toggle_Script {
     <script type="module">
         const wpId = "@Model.currentWorkSpace.Id";
         const noteId = "@Model.selectedNoteId";
-        
+
         console.log("Arcane Notes: Module queue reached. Executing LoadNoteFromDB...");
-        
+
         // window.ExportedFunctions is now guaranteed to be hydrated
         if (window.ExportedFunctions && typeof window.ExportedFunctions.LoadNoteFromDB === 'function') {
             window.ExportedFunctions.LoadNoteFromDB(wpId, noteId);
@@ -290,21 +267,21 @@
             console.error("ExportedFunctions failed to attach to the window object.");
         }
 
-        (function (){
+        document.addEventListener('DOMContentLoaded', () => {
             const btn = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('leftSidebar');
+            const sidebar = document.getElementById('workspace-left-layout-toggle');
             if (!btn || !sidebar) return;
 
-            // Ensure the sidebar starts visible (no 'hidden' class)
             sidebar.classList.remove('hidden');
 
             btn.addEventListener('click', function () {
                 const isNowVisible = !sidebar.classList.toggle('hidden');
-                // reflect state on body for easier styling
                 document.body.classList.toggle('sidebar-open', isNowVisible);
                 btn.classList.toggle('toggled', isNowVisible);
             });
-        })();
+            console.log('Sidebar:', sidebar);
+            console.log('Button:', btn);
+        });
     </script>
 }
 <script src="https://accounts.google.com/gsi/client" async defer></script>

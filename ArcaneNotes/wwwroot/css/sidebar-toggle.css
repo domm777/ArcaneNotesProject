@@ -24,15 +24,17 @@
     user-select: none;
 }
 
-/* Sidebar hidden state */
-/*.LeftSideBar {*/
+/* Sidebar visible state: support multiple sidebar class names */
+.LeftSideBar,
+.workspace-left-layout {
     /* visible by default */
-    /*opacity: 1;
+    opacity: 1;
     transition: opacity 0.18s ease-in-out;
-}*/
+}
 
 /* Sidebar hidden state: do not shift, just hide */
-.LeftSideBar.hidden {
+.LeftSideBar.hidden,
+.workspace-left-layout.hidden {
     opacity: 0;
     display: none !important;
 }

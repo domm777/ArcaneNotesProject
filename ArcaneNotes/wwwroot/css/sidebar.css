@@ -1,4 +1,4 @@
-﻿.LeftSideBar {
+.LeftSideBar {
     margin-top:0px;
     border-radius: 28px;
     background: linear-gradient(180deg, rgba(20, 28, 48, 0.96), rgba(11, 16, 30, 0.96));
@@ -11,6 +11,32 @@
 }
 
 @media (min-width: 0px) and (max-width: 1999px) {
+/*-----------------------------------------
+LAYOUT (FULL HEIGHT SIDEBAR)
+-----------------------------------------*/
+
+.workspace-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+    /* IMPORTANT: removes floating look */
+    width: 100%;
+}
+
+/* FULL HEIGHT SIDEBAR */
+.left-sidebar {
+    min-height: 100vh;
+    height: 100%;
+    position: sticky;
+    top: 0;
+    padding: 28px 18px;
+    background: linear-gradient(180deg, rgba(15, 20, 36, 0.98), rgba(10, 15, 28, 1));
+    border-right: 1px solid rgba(201, 162, 39, 0.25);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+@media (min-width: 0px) and (max-width: 1439px) {
     .LeftSideBar {
         display: none;
         position: absolute;
@@ -97,6 +123,33 @@
 
 /* light green background */
 /*@media (min-width: 2730px) and (max-width: 2929px) {
+.workspace-layout {
+    margin: 0;
+    padding: 0;
+}
+
+.left-sidebar {
+    margin: 0;
+}
+
+/*-----------------------------------------
+CONTENT STYLING
+-----------------------------------------*/
+
+.bottom-sidebar-meta {
+    margin-bottom: 18px;
+    line-height: 1.6;
+    color: rgba(231, 210, 162, 0.82);
+}
+
+.bottom-sidebar-separator {
+    display: inline-block;
+    margin: 0 10px;
+    color: rgba(201, 162, 39, 0.55);
+}
+
+/* light salmon background : */
+@media (min-width: 2630px) and (max-width: 3339px) {
     .LeftSideBar {
         width: auto;
         position: fixed;
@@ -166,7 +219,8 @@
         background-color: lightsalmon;
     }
 }
-/* navajowhite background : */
+
+/* light salmon background : */
 @media (min-width: 3340px) and (max-width: 5007px) {
     .LeftSideBar {
         position: fixed;
@@ -201,5 +255,79 @@
         border-radius: 28px;
         padding: 20px;
         background-color: navajowhite;
+
+    .workspace-sidebar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    /* TILE */
+    .workspace-sidebar-tile {
+        width: 100%;
+        padding: 12px 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(201, 162, 39, 0.15);
+        background: linear-gradient(180deg, rgba(28, 38, 61, 0.6), rgba(18, 26, 43, 0.6));
+        color: #f5e7c2;
+        font-family: "Cinzel", serif;
+        font-size: 0.95rem;
+        text-align: left;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .workspace-sidebar-tile:hover {
+        border-color: rgba(201, 162, 39, 0.5);
+        background: rgba(28, 38, 61, 0.9);
+    }
+
+    /* EMPTY STATE */
+    .bottom-sidebar-empty {
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px dashed rgba(201, 162, 39, 0.25);
+        color: rgba(231, 210, 162, 0.65);
+    }
+
+    /* FORM */
+    .bottom-sidebar-form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .bottom-sidebar-form .workspace-input {
+        width: 100%;
+    }
+
+    .workspace-action-btn {
+        width: 100%;
+    }
+
+    /*-----------------------------------------
+MAIN CONTENT FIX
+-----------------------------------------*/
+
+    .workspace-main-content {
+        padding: 0 24px;
+    }
+
+    /*-----------------------------------------
+RESPONSIVE
+-----------------------------------------*/
+
+    @media (max-width: 900px) {
+        .workspace-layout {
+            grid-template-columns: 1fr;
+        }
+
+        .left-sidebar {
+            position: relative;
+            min-height: auto;
+            border-right: none;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+        }
     }
 }

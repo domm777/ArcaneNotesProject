@@ -6,38 +6,63 @@
 <link rel="stylesheet" href="~/css/workspace.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/cards.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/sidebar.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/sidebar-toggle.css" asp-append-version="true" />
+
 @section GM_Session_Notes {
     <div class="workspace-page" spellcheck="false">
-        <div class="workspace-main-shell">
-            
-            <div class="LeftSideBar" id="leftSidebar">
-                <div class="workspace-info-data-field">
-                    <h4>Title: @Model.currentWorkSpace.Title GameMaster: @Model.currentWorkSpace.GMName</h4>
+
+        <!--NEW LAYOUT WRAPPER -->
+        <div class="workspace-layout">
+
+            <!-- LEFT SIDEBAR -->
+            <div class="workspace-sidebar-shell left-sidebar">
+
+                <div class="workspace-sidebar-header">
+                    <p class="workspace-sidebar-eyebrow">Workspace</p>
+                    <h2 class="workspace-sidebar-title">Collaborators & Notes</h2>
                 </div>
-                <div class="UsersWorkSpace">
-                    @{
-                        <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
-                            @Model.selectedNoteId
-                        </button>
-    
-                        if (Model.currentWorkSpace.Collaborators.Any())
+
+                <div class="workspace-section-subtitle bottom-sidebar-meta">
+                    <strong>Title:</strong> @Model.currentWorkSpace.Title
+                    <span class="bottom-sidebar-separator">•</span>
+                    <strong>GameMaster:</strong> @Model.currentWorkSpace.GMName
+                </div>
+
+                <div class="workspace-sidebar-list">
+                    <button class="workspace-sidebar-tile"
+                            onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
+                        @Model.selectedNoteId
+                    </button>
+
+                    @if (Model.currentWorkSpace.Collaborators.Any())
+                    {
+                        @foreach (var colab in Model.currentWorkSpace.Collaborators)
                         {
-                            @foreach(var colab in Model.currentWorkSpace.Collaborators){
-                                <button class="User_WorkSpace_Tile" onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
-                                    @colab
-                                </button>
-                            }
+                            <button class="workspace-sidebar-tile"
+                                    onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
+                                @colab
+                            </button>
                         }
-                        else
-                        {
-                            <p>No Collaborators Yet</p>
-                        }
-    
-                        <div class="form-group">
-                            <label class="form-label">New Collaborator</label>
-                            <input type="text" id="collaboratorEmailInput" class="form-input" placeholder="Enter User's Email" />
+                    }
+                    else
+                    {
+                        <div class="bottom-sidebar-empty">
+                            No Collaborators Yet
                         </div>
+                    }
+                </div>
+
+                <div class="bottom-sidebar-form">
+                    <label class="workspace-label">New Collaborator</label>
+                    <input type="text"
+                           id="collaboratorEmailInput"
+                           class="workspace-input"
+                           placeholder="Enter User's Email" />
+
+                    <button class="workspace-action-btn"
+                            onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
+                        Add User
+                    </button>
+                </div>
 
                         <div class="form-actions">
                             <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
@@ -68,8 +93,16 @@
                     <input type="hidden" id="noteType" value="gm" />
 
                     @* this is so the export as pdf can get the title and name *@
-                    <input type="hidden" id="noteTitle" value="@Model.currentWorkSpace.Title" />
-                    <input type="hidden" id="gmName" value="@User.Identity?.Name" />
+                    @* <div class="workspace-title-block">
+                                <div id="DivTitleImageScroll" class="workspace-scroll-wrap"></div>
+
+                                <div class="workspace-heading-group">
+                                    <h1 class="AppTitle workspace-main-title">Workspace Notes</h1>
+                                    <p class="workspace-subtitle">
+                                        Build, organize, and export your Workspace notes.
+                                    </p> *@
+                    <input type="hidden" id="defaultNoteTitle" value="@Model.currentWorkSpace.Title" />
+                    <input type="hidden" id="defaultGmName" value="@User.Identity?.Name" />
 
                     <div class="workspace-form-grid">
                         <div class="workspace-field Title_Label_Input">

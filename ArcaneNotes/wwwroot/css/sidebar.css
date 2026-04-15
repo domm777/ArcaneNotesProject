@@ -1,129 +1,45 @@
-/*@media (min-width: 0px) and (max-width: 1999px) {*/
 /*-----------------------------------------
-LAYOUT (FULL HEIGHT SIDEBAR)
+GLOBAL LAYOUT FIX
 -----------------------------------------*/
 
-/* FULL HEIGHT SIDEBAR */
-.workspace-left-layout {
-    width: auto;
-    height: auto;
-    position: sticky;
-    display: flex;
-    top: 200px;
-/*    bottom: 10px;
-    left: 250px;*/
-    flex-direction: column;
-    border-radius: 28px;
-    background-color: lightseagreen;
-    border-radius: 28px;
-    padding: 28px 18px;
-    border-radius: 0;
-    box-shadow: none;
-    background: linear-gradient(180deg, rgba(20, 28, 48, 0.96), rgba(11, 16, 30, 0.96));
-    border: 1px solid rgba(201, 162, 39, 0.45);
-    box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.10), 0 18px 50px rgba(0, 0, 0, 0.45), inset 0 0 35px rgba(255, 255, 255, 0.03);
-    box-sizing: border-box;
-    background: linear-gradient(180deg, rgba(15, 20, 36, 0.98), rgba(10, 15, 28, 1));
-    border-right: 1px solid rgba(201, 162, 39, 0.25);
-}
-
-/*@media (min-width: 0px) and (max-width: 1439px) {
-    .workspace-left-layout {
-        position: absolute;
-        width: auto;
-        position: fixed;
-        top: 20px;
-        bottom: 0px;
-        left: 20px;
-        right: 20px;
-        border-radius: 28px;
-        padding: 20px;
-        margin-bottom: 25px;
-        background-color: darkcyan;
-    }
-}
-
-@media (min-width: 2000px) and (max-width: 2189px) {
-    .workspace-left-layout {
-        position: fixed;
-        width: 300px;
-        top: 200px;
-        bottom: 100px;
-        left: 0px;
-        border-radius: 28px;
-        padding: 20px;
-        margin-bottom: 25px;
-        background-color: darkolivegreen;
-    }
-}*/
-
-/* firebick background 1854.44*/
-/*@media (min-width: 2190px) and (max-width: 2224px) {
-    .workspace-left-layout {
-         display: inherit;
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 20px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: firebrick;
-    }
-}*/
-
-/* light slate gray background */
-/*@media (min-width: 2225px) and (max-width: 2529px) {
-    .workspace-left-layout {
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 90px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightslategray;
-    }
-}*/
-
-/* light pink background */
-/*@media (min-width: 2530px) and (max-width: 2629px) {
-    .workspace-left-layout {
-        position: fixed;
-        top: 200px;
-        bottom: 100px;
-        left: 170px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightpink;
-    }
-}*/
-
-/* light pink background */
-/*@media (min-width: 2630px) and (max-width: 2729px) {
-    .workspace-left-layout {
-        position: fixed;
-        width: auto;
-        top: 200px;
-        bottom: 100px;
-        left: 200px;
-        border-radius: 28px;
-        padding: 20px;
-        background-color: lightyellow;
-    }
-}*/
-
-/* light green background */
-/*@media (min-width: 2730px) and (max-width: 2929px) {
-.workspace-left-layout {
+body {
     margin: 0;
     padding: 0;
 }
 
+/*-----------------------------------------
+FULL HEIGHT LEFT SIDEBAR (FIXED)
+-----------------------------------------*/
+
 .workspace-left-layout {
-    margin: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 18px;
+    box-sizing: border-box;
+
+    background: linear-gradient(180deg, rgba(15, 20, 36, 0.98), rgba(10, 15, 28, 1));
+    border-right: 1px solid rgba(201, 162, 39, 0.25);
+
+    border-radius: 0;
+    box-shadow: none;
+
+    z-index: 100;
+}
+
+.workspace-main-shell {
+    margin: 0 auto;
+    transform: translateX(130px); /* half of sidebar width */
 }
 
 /*-----------------------------------------
-CONTENT STYLING
+SIDEBAR CONTENT
 -----------------------------------------*/
 
 .bottom-sidebar-meta {
@@ -138,12 +54,8 @@ CONTENT STYLING
     color: rgba(201, 162, 39, 0.55);
 }
 
-/* light salmon background : */
-/*@media (min-width: 2630px) and (max-width: 3339px) {
-    
-}*/
-
 /* TILE */
+
 .workspace-sidebar-tile {
     width: 100%;
     padding: 12px 14px;
@@ -158,12 +70,13 @@ CONTENT STYLING
     transition: 0.2s ease;
 }
 
-    .workspace-sidebar-tile:hover {
-        border-color: rgba(201, 162, 39, 0.5);
-        background: rgba(28, 38, 61, 0.9);
-    }
+.workspace-sidebar-tile:hover {
+    border-color: rgba(201, 162, 39, 0.5);
+    background: rgba(28, 38, 61, 0.9);
+}
 
 /* EMPTY STATE */
+
 .bottom-sidebar-empty {
     padding: 12px;
     border-radius: 10px;
@@ -172,40 +85,44 @@ CONTENT STYLING
 }
 
 /* FORM */
+
 .bottom-sidebar-form {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
-    .bottom-sidebar-form .workspace-input {
-        width: 100%;
-    }
+
+.bottom-sidebar-form .workspace-input {
+    width: 100%;
+}
 
 .workspace-action-btn {
     width: 100%;
 }
 
 /*-----------------------------------------
-            MAIN CONTENT FIX
+MAIN CONTENT (SHIFT RIGHT)
 -----------------------------------------*/
 
 .workspace-main-content {
-    padding: 0 24px;
+    margin-left: 260px; /* match sidebar width */
+    padding: 24px;
 }
 
 /*-----------------------------------------
-                RESPONSIVE
+RESPONSIVE
 -----------------------------------------*/
 
 @media (max-width: 900px) {
-/*    .workspace-left-layout {
-        grid-template-columns: 1fr;
-    }
-
     .workspace-left-layout {
         position: relative;
-        min-height: auto;
+        width: 100%;
+        height: auto;
         border-right: none;
         border-bottom: 1px solid rgba(201, 162, 39, 0.25);
-    }*/
+    }
+
+    .workspace-main-content {
+        margin-left: 0;
+    }
 }

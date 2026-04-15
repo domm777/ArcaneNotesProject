@@ -8,23 +8,7 @@
     --workspace-direction: row;          /* layout flow: row | column */
 }
 
-/* convenience example classes (use on .workspace-page to switch presets)
-.workspace-page.layout-compact {
-    --workspace-max-width: 1000px;
-    --workspace-card-max-width: 1100px;
-    --workspace-padding-vertical: 20px;
-    --workspace-padding-horizontal: 16px;
-    --workspace-direction: column;
-}
 
-.workspace-page.layout-wide {
-    --workspace-max-width: 2000px;
-    --workspace-card-max-width: 1800px;
-    --workspace-padding-vertical: 40px;
-    --workspace-padding-horizontal: 32px;
-    --workspace-direction: row;
-}
-*/
 
 /*-----------------------------------------WORKSPACE PAGE-------------------------------------------------*/
 
@@ -51,7 +35,11 @@ body {
 .workspace-main-shell {
     display: flex;
     width: min(100%, var(--workspace-max-width));
-    margin: 0 auto;
+    margin-left: calc(260px + auto);
+    margin-right: auto;
+    /* actual fix */
+    position: relative;
+    left: 70px; /* half sidebar width */
 }
 
 .workspace-left-layout-container {
@@ -155,18 +143,15 @@ body {
 .workspace-card {
     width: 1500px;
     margin: 20px auto;
-    padding: 40px 42px;
+    padding: 30px 42px;
     border-radius: 28px;
-    background: linear-gradient(180deg, rgba(20, 28, 48, 0.96), rgba(11, 16, 30, 0.96));
-    border: 1px solid rgba(201, 162, 39, 0.45);
-    box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.10), 0 18px 50px rgba(0, 0, 0, 0.45), inset 0 0 35px rgba(255, 255, 255, 0.03);
     box-sizing: border-box;
 }
 
 .workspace-card-inner {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    
 }
 
 .workspace-title-block {
@@ -177,6 +162,7 @@ body {
     display: flex;
     justify-content: center;
     margin-bottom: 14px;
+    
 }
 
 .workspace-scroll-image {
@@ -191,6 +177,7 @@ body {
     flex-direction: column;
     gap: 8px;
     align-items: center;
+
 }
 
 .workspace-main-title {
@@ -198,6 +185,7 @@ body {
     font-size: 3rem;
     color: #f0d79a;
     text-shadow: 0 0 10px rgba(201, 162, 39, 0.35);
+
 }
 
 .workspace-subtitle {
@@ -307,11 +295,7 @@ body {
 /*-----------------------------------------SECTIONS-------------------------------------------------*/
 
 .workspace-section {
-    padding: 24px 22px;
-    border-radius: 20px;
-    border: 1px solid rgba(201, 162, 39, 0.28);
-    background: linear-gradient(180deg, rgba(23, 31, 51, 0.88), rgba(17, 24, 39, 0.92));
-    box-shadow: inset 0 0 14px rgba(255, 255, 255, 0.02);
+    margin: 0px;
 }
 
 .workspace-section-header {
@@ -534,11 +518,68 @@ body {
 /*-----------------------------------------MOBILE-------------------------------------------------*/
 
 @media (max-width: 768px) {
+
+    /* STACK EVERYTHING */
+    .workspace-left-layout-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* MAIN CONTENT FIRST */
+    .workspace-main-shell {
+        order: 1;
+        width: 100%;
+        margin: 0;
+        transform: none;
+        left: 0;
+    }
+
+    /* SIDEBAR LAST (BOTTOM) */
+    .workspace-left-layout {
+        order: 2;
+        position: relative;
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+        height: auto;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+
     .workspace-page {
         padding: 18px 12px;
     }
 
+    /* STACK MAIN LAYOUT */
+    .workspace-left-layout-container {
+        flex-direction: column;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* SIDEBAR FULL WIDTH */
+    .workspace-left-layout {
+        position: relative;
+        width: 100%;
+        min-width: unset;
+        max-width: unset;
+        height: auto;
+    }
+
+    /* FIX MAIN SHELL */
+    .workspace-main-shell {
+        width: 100%;
+        margin: 0;
+        transform: none;
+        left: 0;
+    }
+
+    /* FIX CARD (THIS IS BIG ONE) */
     .workspace-card {
+        width: 100%;
+        max-width: 100%;
         padding: 24px 16px;
         border-radius: 20px;
     }
@@ -568,7 +609,8 @@ body {
 
     .workspace-action-grid,
     .workspace-tools-grid {
-        flex-direction: column;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
     }
 
     .workspace-action-btn,
@@ -576,7 +618,15 @@ body {
     .workspace-secondary-action,
     .btn-gm {
         width: 100%;
-        min-width: unset;
+        min-width: 0; /* critical */
+        font-size: 0.85rem; /* optional: helps fit text */
+        padding: 10px;
+    }
+
+    /* FORM STACK */
+    .workspace-form-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
     }
 
     .workspace-scroll-image {

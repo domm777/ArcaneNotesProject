@@ -137,7 +137,7 @@ export function SetUpCard(appendLocation, cardType, noteData = {}) {
             </div>
 
             <div class="spellbook-field">
-                <label class="spellbook-label">Custom Label</label>
+                
                 <input type="text" class="spellbook-input card-label" placeholder="Custom Label" value="${CardLabel}">
             </div>
 

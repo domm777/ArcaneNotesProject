@@ -53,7 +53,8 @@
                 class="workspace-input"
                 placeholder="Enter User's Email" />
         <div class="form-actions">
-            <button onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
+            <button class="workspace-action-btn"
+                    onclick="ExportedFunctions.AddNewUser('@Model.currentWorkSpace.Id', document.getElementById('collaboratorEmailInput').value)">
                 Add User
             </button>
         </div>

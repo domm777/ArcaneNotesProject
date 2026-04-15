@@ -27,11 +27,12 @@
                 <label asp-for="RememberMe" class="remember-label">Remember Me</label>
             </div>
 
-            <button type="submit">Login</button>
-            <br />
-            <br />
-            <p>OR</p>
-            <a href="/Login/Register" class="btn btn-gm btn-lg px-5 py-3 fs-3 fw-bold">Register</a>
+            <div class="auth-row">
+                <button class="btn-auth">Login</button>
+                <p>  </p>
+                <button class="btn-auth">Register</button>
+            </div>
+            
 
 
             @if (!ViewData.ModelState.IsValid && ViewData.ModelState.ErrorCount > 0)

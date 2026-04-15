@@ -97,7 +97,17 @@ SIDEBAR CONTENT
 }
 
 .workspace-action-btn {
-    width: 100%;
+    width: auto; /* stop full stretch */
+    align-self: center; /* center in flex column */
+    padding: 12px 20px;
+    border-radius: 14px;
+    border: 1px solid rgba(201, 162, 39, 0.6);
+    background: linear-gradient(180deg, #1b243a, #111827);
+    color: #f0d79a;
+    font-family: "Cinzel", serif;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s ease;
 }
 
 /*-----------------------------------------

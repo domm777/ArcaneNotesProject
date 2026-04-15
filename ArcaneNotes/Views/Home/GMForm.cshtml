@@ -22,21 +22,27 @@
 
     <div class="workspace-sidebar-list">
         <button class="workspace-sidebar-tile"
-                onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
-            @Model.selectedNoteId
+                onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@Model.currentWorkSpace.Collaborators[0].UserId')">
+            @Model.currentWorkSpace.Collaborators[0].UserName
         </button>
-
-        @if (Model.currentWorkSpace.Collaborators.Any()) {
-            @foreach (var colab in Model.currentWorkSpace.Collaborators) {
-                <button class="workspace-sidebar-tile"
-                        onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab')">
-                    @colab
-                </button>
+        @{
+            if (Model.currentWorkSpace.Collaborators.Count > 1)
+            {
+                @for (int i = 1; i < Model.currentWorkSpace.Collaborators.Count; i++)
+                {
+                    var colab = Model.currentWorkSpace.Collaborators[i];
+                    <button class="workspace-sidebar-tile"
+                            onclick="ExportedFunctions.LoadNoteFromDB('@Model.currentWorkSpace.Id', '@colab.UserId')">
+                        @colab.UserName
+                    </button>
+                }
             }
-        } else {
-            <div class="bottom-sidebar-empty">
-                No Collaborators Yet
-            </div>
+            else
+            {
+                <div class="bottom-sidebar-empty">
+                    No Collaborators Yet
+                </div>
+            }
         }
     </div>
 
@@ -229,12 +235,11 @@
 
                     <button class="workpace-spellbook-tools-btn"
                             type="button"
-                            onclick="ExportedFunctions.SaveData('@Model.currentWorkSpace.Id', '@Model.selectedNoteId')">
+                            onclick="ExportedFunctions.SaveData('@Model.currentWorkSpace.Id', '@Model.selectedNote.UserId')">
                         Save Data
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -250,7 +255,7 @@
 @section Toggle_Script {
     <script type="module">
         const wpId = "@Model.currentWorkSpace.Id";
-        const noteId = "@Model.selectedNoteId";
+        const noteId = "@Model.selectedNote.UserId";
 
         console.log("Arcane Notes: Module queue reached. Executing LoadNoteFromDB...");
 

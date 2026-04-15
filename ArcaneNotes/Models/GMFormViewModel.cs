@@ -6,6 +6,7 @@ public class GMFormViewModel
 {
     public WorkSpaceDTO? currentWorkSpace;
     public Collaberator selectedNote;
+    public string userId;
     public GMFormViewModel()
     {
     }

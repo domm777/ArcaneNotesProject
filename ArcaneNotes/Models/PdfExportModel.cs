@@ -16,22 +16,23 @@
 		public string CardLabel { get; set; } = "";
 		public string Date { get; set; } = "";
 		public bool FutureEvent { get; set; }
+		public bool Hidden { get; set; }
 		public PdfCardContent CardData { get; set; } = new();
 	}
 
 	public class PdfCardContent
 	{
 		public List<PdfCardData>? Children { get; set; }
+
 		public string? ImageBase64 { get; set; }
+
 		public string? Name { get; set; }
 		public string? LocationMet { get; set; }
 		public string? WhatSaid { get; set; }
 		public string? Relationship { get; set; }
 
 		public string? Location { get; set; }
-
 		public string? ExtraInfo { get; set; }
-
 		public string? Plot { get; set; }
 
 		public string? PP { get; set; }
@@ -39,24 +40,13 @@
 		public string? SP { get; set; }
 		public string? CP { get; set; }
 
-		public string? SelectedType { get; set; }
-		public ItemData? ItemData { get; set; }
-		public WeaponData? WeaponData { get; set; }
-		public SpellData? SpellData { get; set; }
-	}
-
-	public class ItemData
-	{
 		public string? IName { get; set; }
 		public string? ICategory { get; set; }
 		public string? IRarity { get; set; }
 		public string? IDescription { get; set; }
 		public string? IWeight { get; set; }
 		public string? IQuantity { get; set; }
-	}
 
-	public class WeaponData
-	{
 		public string? WName { get; set; }
 		public string? WCategory { get; set; }
 		public string? WRarity { get; set; }
@@ -64,10 +54,7 @@
 		public string? WWeight { get; set; }
 		public string? WAttackRole { get; set; }
 		public string? WDamageType { get; set; }
-	}
 
-	public class SpellData
-	{
 		public string? SName { get; set; }
 		public string? SLevel { get; set; }
 		public string? SSchool { get; set; }

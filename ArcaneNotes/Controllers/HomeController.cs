@@ -148,9 +148,9 @@ namespace ArcaneNotes.Controllers
         public async Task<IActionResult> SaveWorkspace(string workPlaceId, string userId, [FromBody] JsonElement data)
         {
             var myUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            userId = myUserId;
             if (myUserId != userId)
                 return Unauthorized(); // Return 401 Unauthorized instead of 400 BadRequest for auth failures
-
             var token = await HttpContext.GetTokenAsync("access_token");
             var client = _httpClientFactory.CreateClient("ArcaneApi");
     
